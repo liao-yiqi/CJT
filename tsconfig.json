@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "outDir": "target",
+    "typeRoots": ["./node_modules/@types/", "./types"],
+    "jsx": "preserve"
+  },
+  "files": [],
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
+}
