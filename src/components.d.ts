@@ -36,7 +36,9 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     ScButton: typeof import('./components/ScBaseComponents/ScButton/index.vue')['default']
     ScColumnItem: typeof import('./components/ScBaseComponents/ScTable/ScColumnItem.vue')['default']
+    ScInput: typeof import('./components/ScBaseFormItems/ScInput/index.vue')['default']
     ScPageContent: typeof import('./components/ScBaseComponents/ScPageContent/index.vue')['default']
+    ScSearchbar: typeof import('./components/ScBaseComponents/ScSearchbar/index.vue')['default']
     ScTable: typeof import('./components/ScBaseComponents/ScTable/index.vue')['default']
     SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
   }
@@ -71,7 +73,9 @@ declare global {
   const RouterView: typeof import('vue-router')['RouterView']
   const ScButton: typeof import('./components/ScBaseComponents/ScButton/index.vue')['default']
   const ScColumnItem: typeof import('./components/ScBaseComponents/ScTable/ScColumnItem.vue')['default']
+  const ScInput: typeof import('./components/ScBaseFormItems/ScInput/index.vue')['default']
   const ScPageContent: typeof import('./components/ScBaseComponents/ScPageContent/index.vue')['default']
+  const ScSearchbar: typeof import('./components/ScBaseComponents/ScSearchbar/index.vue')['default']
   const ScTable: typeof import('./components/ScBaseComponents/ScTable/index.vue')['default']
   const SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
 }
