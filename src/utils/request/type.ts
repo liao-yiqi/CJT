@@ -4,7 +4,7 @@ import type { AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } fr
 export interface SCRequestInterceptors<T = AxiosResponse> {
   requestInterceptor?: (config: InternalAxiosRequestConfig) => InternalAxiosRequestConfig
   requestInterceptorCatch?: (err: any) => any
-  responseIntereptor?: (res: T) => T
+  responseInterceptor?: (res: T) => T
   responseInterceptorCatch?: (error: any) => any
 }
 
