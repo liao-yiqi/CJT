@@ -29,7 +29,7 @@ class SCRequest {
       this.interceptors?.requestInterceptorCatch
     )
     this.instance.interceptors.response.use(
-      this.interceptors?.responseIntereptor,
+      this.interceptors?.responseInterceptor,
       this.interceptors?.responseInterceptorCatch
     )
   }
@@ -47,8 +47,8 @@ class SCRequest {
       this.instance
         .request<any, T>(finalConfig)
         .then(res => {
-          const result = config.interceptors?.responseIntereptor
-            ? config.interceptors.responseIntereptor(res as any)
+          const result = config.interceptors?.responseInterceptor
+            ? config.interceptors.responseInterceptor(res as any)
             : res
           resolve(result as T)
         })

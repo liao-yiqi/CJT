@@ -1,4 +1,4 @@
-export type ScInputProps = {
+export interface ScInputProps {
   modelValue: string | number
   type?: ScInputType
   size?: 'large' | 'small' | 'default'
@@ -14,7 +14,7 @@ export type ScInputProps = {
 
 export type ScInputType = 'text' | 'number' | 'textarea' | 'password'
 
-export type ScInputEmits = {
+export interface ScInputEmits {
   (e: 'update:modelValue', value: string | number): void
   (e: 'input', value: string | number): void
   (e: 'change', value: string | number): void

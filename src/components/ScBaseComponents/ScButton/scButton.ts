@@ -1,4 +1,4 @@
-export type ScButtonProps = {
+export interface ScButtonProps {
   type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default' | ''
   size?: 'large' | 'default' | 'small'
   plain?: boolean

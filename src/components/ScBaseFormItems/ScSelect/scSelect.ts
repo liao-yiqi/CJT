@@ -1,6 +1,6 @@
 import type { DictOption } from '@/types/dict'
 
-export type ScSelectProps = {
+export interface ScSelectProps {
   modelValue: ScSelectModelValue
   options?: Array<ScSelectOption> | Array<DictOption>
   dictField?: string
@@ -27,21 +27,21 @@ export type ScSelectModelValue =
   | object
   | Array<string | number | boolean | object>
 
-export type ScSelectOption = {
+export interface ScSelectOption {
   label: string
   value: string | number
   disabled?: boolean
   options?: Array<ScSelectOption>
 }
 
-export type CustomConfig = {
+export interface CustomConfig {
   label?: string | ((item: any) => string)
   value?: string
   disabled?: boolean | ((item: any) => boolean)
   options?: string
 }
 
-export type ScSelectEmits = {
+export interface ScSelectEmits {
   (e: 'update:modelValue', value: ScSelectModelValue): void
   (e: 'change', value: any): void
   (e: 'visible-change', visible: boolean): void

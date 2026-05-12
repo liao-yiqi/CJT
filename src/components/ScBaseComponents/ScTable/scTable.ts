@@ -1,6 +1,6 @@
 type TableData = string | number | boolean | null
 
-export type TableColumn = {
+export interface TableColumn {
   prop: string
   label: string
   width?: string | number
@@ -12,7 +12,7 @@ export type TableColumn = {
   showOverflowTooltip?: boolean
 }
 
-export type TreeConfig = {
+export interface TreeConfig {
   rowKey?: string
   treeProps?: {
     children?: string
@@ -21,7 +21,7 @@ export type TreeConfig = {
   defaultExpandAll?: boolean
 }
 
-export type ScTableProps = {
+export interface ScTableProps {
   // 基础配置
   data: Array<Record<string, TableData>>
   tableColumns: Array<TableColumn>
@@ -46,7 +46,7 @@ export type ScTableProps = {
   treeConfig?: TreeConfig
 }
 
-export type ScTableInstance = {
+export interface ScTableInstance {
   toggleRowExpansion: (row: any, expanded: boolean) => void
   toggleRowSelection: (row: any, selected: boolean) => void
 }
