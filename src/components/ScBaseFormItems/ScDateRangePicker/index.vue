@@ -5,7 +5,7 @@ import type { ScDateRangePickerProps, ScDateRangePickerEmits } from './scDateRan
 const props = withDefaults(defineProps<ScDateRangePickerProps>(), {
   type: 'daterange',
   startPlaceholder: '开始日期',
-  endPlaceholder: '结束日期'
+  endPlaceholder: '结束日期',
 })
 
 const emit = defineEmits<ScDateRangePickerEmits>()

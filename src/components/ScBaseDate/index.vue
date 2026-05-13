@@ -27,7 +27,7 @@ function handleChange(value: string | [string, string]) {
     :disabled="props.disabled"
     :clearable="props.clearable"
     :size="props.size"
-    :range-separator="props.rangeSeparator"
+    :range-separator="rangeSeparator"
     @update:model-value="emit('update:modelValue', $event)"
     @change="handleChange"
   />
