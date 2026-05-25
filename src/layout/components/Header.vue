@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useLayoutStore } from '../composables/useLayout'
-import { useUserStore } from '@/store/modules/user'
+import { useUserStore } from '@/store/modules/user-store.ts'
 import {
   Expand,
   Fold,

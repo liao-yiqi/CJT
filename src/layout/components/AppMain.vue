@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTabsStore } from '@/store/modules/tabs'
+import { useTabsStore } from '@/store/modules/tabs-store.ts'
 
 const tabsStore = useTabsStore()
 const cachedViews = computed(() => tabsStore.cachedViews)

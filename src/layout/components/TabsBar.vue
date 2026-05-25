@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useTabsStore, type TabView } from '@/store/modules/tabs'
+import { useTabsStore, type TabView } from '@/store/modules/tabs-store.ts'
 import {
   ArrowDown,
   Back,

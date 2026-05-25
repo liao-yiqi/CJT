@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 import type { LoginFormData } from '@/types/user'
 
-export const login = (data: LoginFormData) => {
+export const loginApi = (data: LoginFormData) => {
   return request.post<TokenResponse>({ url: '/login', data })
 }
 

@@ -1,5 +1,5 @@
-import { login, logout } from '@/api/login'
-import { getUserInfo } from '@/api/system/user'
+import { loginApi, logout } from '@/api/login-api.ts'
+import { getUserInfo } from '@/api/system/user-api.ts'
 import type { UserState, LoginFormData } from '@/types/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { encryptWithSM4, encryptWithSm2, generateRandomSymmetricKey } from '@/utils/jsencrypt'
@@ -32,7 +32,7 @@ export const useUserStore = defineStore('user', {
         uuid: loginFormData.uuid
       }
       return new Promise((resolve, reject) => {
-        login(params)
+        loginApi(params)
           .then(res => {
             setToken(res.token)
             this.token = res.token

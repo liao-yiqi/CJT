@@ -1,4 +1,4 @@
-import { useDictStore } from '@/store/modules/dict'
+import { useDictStore } from '@/store/modules/dict-store.ts'
 import type { DictOption } from '@/types/dict'
 
 /**

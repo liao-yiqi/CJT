@@ -3,7 +3,7 @@ import type { ScRouteRecordRaw } from 'vue-router'
 import { staticRoutes } from '@/router/modules/staticRoutes'
 import { sessionStorage } from '@/utils/storage'
 import { PROJECT_ID_KEY } from '@/constant/globalVariables'
-import { getRouters } from '@/api/system/menu'
+import { getRouters } from '@/api/system/menu-api.ts'
 import Layout from '@/layout/index.vue'
 
 // 对views文件夹下的所有.vue文件进行自动导入

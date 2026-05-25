@@ -1,4 +1,4 @@
-import { useUserStore } from '@/store/modules/user.ts'
+import { useUserStore } from '@/store/modules/user-store.ts'
 
 const ADMIN_PERMISSION = '*:*:*'
 

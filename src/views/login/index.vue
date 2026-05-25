@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useUserStore } from '@/store/modules/user'
+import { useUserStore } from '@/store/modules/user-store.ts'
 import type { LocationQueryValue } from 'vue-router'
 import { ScMessage } from '@/utils/ElUtils'
 import { safeRequest } from '@/utils/safeRequest.ts'

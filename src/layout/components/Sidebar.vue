@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useGenerateRoutesStore } from '@/store/modules/router'
+import { useGenerateRoutesStore } from '@/store/modules/router-store.ts'
 import { useLayoutStore } from '../composables/useLayout'
 import SidebarMenuItem from './SidebarMenuItem.vue'
 import type { ScRouteRecordRaw } from 'vue-router'
