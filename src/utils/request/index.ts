@@ -1,4 +1,4 @@
-import axios, { type AxiosInstance } from 'axios'
+import axios, { type AxiosInstance, type AxiosResponse } from 'axios'
 import type { SCRequestConfig, SCRequestInterceptors } from './type.ts'
 import {
   globalRequestInterceptor,
@@ -71,6 +71,14 @@ class SCRequest {
   delete<T = any>(config: SCRequestConfig<T>): Promise<T> {
     return this.request({ ...config, method: 'DELETE' })
   }
+
+  download(config: SCRequestConfig<Blob>): Promise<AxiosResponse<Blob>> {
+    return this.request<any>({
+      ...config,
+      method: config.method ?? 'GET',
+      responseType: 'blob'
+    })
+  }
 }
 
 // 导出默认实例
@@ -78,5 +86,3 @@ export default new SCRequest({
   baseURL: BASE_URL,
   timeout: TIME_OUT
 })
-
-export { SCRequest }

@@ -15,6 +15,7 @@ declare module 'vue-router' {
     noCache?: boolean
     link?: string
     activeMenu: string
+    fullHeight?: boolean
   }
 }
 

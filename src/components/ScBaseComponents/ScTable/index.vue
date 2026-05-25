@@ -111,68 +111,70 @@ defineExpose<ScTableInstance>({
 
 <template>
   <div class="sc-table-list">
-    <el-table
-      ref="tableRef"
-      v-loading="loading"
-      v-bind="tableAttrs"
-      v-on="tableEvents"
-      class="sc-table"
-      :data="data"
-      :border="border"
-      :stripe="stripe"
-      :height="height"
-      :row-key="resolvedTreeConfig.rowKey"
-      :tree-props="resolvedTreeConfig.treeProps"
-      :default-expand-all="resolvedTreeConfig.defaultExpandAll"
-      :row-class-name="rowClassName"
-      @selection-change="emit('selection-change', $event)"
-    >
-      <!-- 选择列 -->
-      <el-table-column
-        v-if="showSelection"
-        type="selection"
-        width="50"
-        fixed="left"
-        align="center"
-      />
-      <!-- 序号列 -->
-      <el-table-column
-        v-if="showIndex"
-        type="index"
-        label="序号"
-        width="80"
-        align="center"
-        :index="indexMethod"
-      />
-      <!-- 数据列 -->
-      <template v-for="column in tableColumns" :key="column.prop">
-        <sc-column-item :columnItem="column">
-          <template v-for="(_, name) in $slots" #[name]="slotProps">
-            <slot :name="name" v-bind="slotProps" />
-          </template>
-        </sc-column-item>
-      </template>
-      <!-- 操作列 -->
-      <el-table-column
-        v-if="showAction && tableColumns.length !== 0"
-        label="操作"
-        :width="actionWidth"
-        :fixed="actionFixed"
-        align="center"
+    <div class="sc-table-wrapper">
+      <el-table
+        ref="tableRef"
+        v-loading="loading"
+        v-bind="tableAttrs"
+        v-on="tableEvents"
+        class="sc-table"
+        :data="data"
+        :border="border"
+        :stripe="stripe"
+        :row-key="resolvedTreeConfig.rowKey"
+        :tree-props="resolvedTreeConfig.treeProps"
+        :default-expand-all="resolvedTreeConfig.defaultExpandAll"
+        :row-class-name="rowClassName"
+        height="100%"
+        @selection-change="emit('selection-change', $event)"
       >
-        <template #default="scope">
-          <slot name="action" :row="scope.row" :$index="scope.$index" />
+        <!-- 选择列 -->
+        <el-table-column
+          v-if="showSelection"
+          type="selection"
+          width="50"
+          fixed="left"
+          align="center"
+        />
+        <!-- 序号列 -->
+        <el-table-column
+          v-if="showIndex"
+          type="index"
+          label="序号"
+          width="80"
+          align="center"
+          :index="indexMethod"
+        />
+        <!-- 数据列 -->
+        <template v-for="column in tableColumns" :key="column.prop">
+          <sc-column-item :columnItem="column">
+            <template v-for="(_, name) in $slots" #[name]="slotProps">
+              <slot :name="name" v-bind="slotProps" />
+            </template>
+          </sc-column-item>
         </template>
-      </el-table-column>
-      <!-- 空状态 -->
-      <template #empty>
-        <div class="table-empty">
-          <slot name="empty">
-            <el-empty :image-size="120" description="暂无数据" />
-          </slot>
-        </div>
-      </template>
-    </el-table>
+        <!-- 操作列 -->
+        <el-table-column
+          v-if="showAction && tableColumns.length !== 0"
+          label="操作"
+          :width="actionWidth"
+          :fixed="actionFixed"
+          align="center"
+        >
+          <template #default="scope">
+            <slot name="action" :row="scope.row" :$index="scope.$index" />
+          </template>
+        </el-table-column>
+        <!-- 空状态 -->
+        <template #empty>
+          <div class="table-empty">
+            <slot name="empty">
+              <el-empty :image-size="120" description="暂无数据" />
+            </slot>
+          </div>
+        </template>
+      </el-table>
+    </div>
     <!-- 分页 -->
     <div v-if="showPagination && data.length !== 0" class="pagination-content">
       <el-pagination
@@ -197,25 +199,20 @@ defineExpose<ScTableInstance>({
 
 .sc-table-list {
   @include flex-col;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   border-radius: 5px;
   overflow: hidden;
   gap: 5px;
 
-  .sc-table {
-    @include flex-col;
-    overflow: hidden;
-    height: 100%;
+  .sc-table-wrapper {
+    flex: 1;
+    min-height: 0;
     position: relative;
 
-    :deep(.el-table__body-wrapper) {
-      flex: 1;
-      overflow: auto;
-      min-height: 300px;
-    }
-
-    .table-empty {
-      height: 100%;
+    .sc-table {
+      position: absolute;
+      inset: 0;
     }
   }
 

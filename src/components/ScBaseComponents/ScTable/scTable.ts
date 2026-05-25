@@ -28,7 +28,6 @@ export interface ScTableProps {
   loading?: boolean
   border?: boolean
   stripe?: boolean
-  height?: number | string
   rowClassName?: string | ((data: { row: Record<string, TableData>; rowIndex: number }) => string)
   // 功能列
   showSelection?: boolean

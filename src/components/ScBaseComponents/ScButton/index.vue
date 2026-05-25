@@ -8,7 +8,6 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<ScButtonProps>(), {
-  type: 'info',
   size: 'default',
   plain: false,
   text: false,
@@ -41,8 +40,10 @@ const handleClick = async (e: MouseEvent) => {
     innerLoading.value = true
     await result
   } catch (e) {
-    console.error('捕获到点击事件异常========>', e)
-    throw e
+    if (typeof e === 'string') {
+      console.error('捕获到点击事件异常========>', e)
+      throw e
+    }
   } finally {
     innerLoading.value = false
   }
@@ -77,8 +78,6 @@ const handleClick = async (e: MouseEvent) => {
     <template v-for="(slotFn, name) in $slots" :key="name" v-slot:[name]="slotProps">
       <component :is="slotFn" v-bind="slotProps" />
     </template>
-    <!--  按钮默认插槽  -->
-    <slot />
   </el-button>
 </template>
 

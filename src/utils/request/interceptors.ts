@@ -19,10 +19,22 @@ export const globalRequestInterceptorCatch = (error: unknown) => {
 }
 
 /** 全局响应拦截：统一解构 data 层 */
-export const globalResponseInterceptor = (res: AxiosResponse<BaseResponse>): any => {
-  const { code, msg } = res.data
+export const globalResponseInterceptor = async (
+  res: AxiosResponse<BaseResponse | Blob>
+): Promise<any> => {
+  if (res.data instanceof Blob) {
+    // 尝试解析是否为 JSON 错误
+    try {
+      const text = await res.data.text()
+      const json = JSON.parse(text) as BaseResponse
+      handleBusinessError(json.code, json.msg)
+      return Promise.reject(json)
+    } catch {
+      return res
+    }
+  }
+  const { code, msg } = res.data as BaseResponse
   if (code == 200) return res.data
-
   handleBusinessError(code, msg)
   return Promise.reject({ code, msg })
 }

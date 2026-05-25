@@ -1,0 +1,72 @@
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.sc-page-container {
+  @include flex-col;
+  overflow: hidden;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+
+  .page-search-content {
+    width: 100%;
+  }
+
+  .page-operate-content {
+    display: flex;
+    justify-content: space-between;
+
+    .base-btn-list {
+      display: flex;
+      gap: 20px;
+    }
+
+    .extra-operate {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+
+    }
+  }
+
+  .page-table-content {
+    @include flex-col;
+    flex: 1;
+    min-height: 0;
+    overflow-x: auto;
+    border: 1px solid #e2e2e2;
+    border-radius: 5px;
+
+    .action-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+}
+
+.column-setting-dropdown {
+  padding: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+
+  .dropdown-title {
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+    color: #303133;
+  }
+
+  .column-checkbox-item {
+    margin-bottom: 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

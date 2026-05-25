@@ -1,5 +1,7 @@
+import type { ButtonType } from 'element-plus'
+
 export interface ScButtonProps {
-  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default' | ''
+  type?: ButtonType
   size?: 'large' | 'default' | 'small'
   plain?: boolean
   text?: boolean

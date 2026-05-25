@@ -19,8 +19,8 @@ const businessErrorHandlers: Record<number, BusinessErrorHandler> = {
     }
   },
   403: () => {},
-  500: () => {
-    ElMessage.error('服务器发生错误，请稍后再试')
+  500: message => {
+    ElMessage.error(message ?? '服务器发生错误，请稍后再试')
   }
 }
 

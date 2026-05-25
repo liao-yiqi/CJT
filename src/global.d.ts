@@ -17,6 +17,20 @@ type ListResponse<T> = BaseResponse & {
   total: number
 }
 
+// 全局store状态
 type GlobalState = {
   existLoading: boolean
+}
+
+// 下载参数
+type DownloadFilePayload = {
+  requestUrl: string
+  extraParams?: Record<string, any>
+  requestMethod?: 'GET' | 'POST'
+}
+
+// 分页参数
+type PaginationParams = {
+  pageNum: number
+  pageSize: number
 }

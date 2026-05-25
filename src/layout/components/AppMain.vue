@@ -25,25 +25,38 @@ const cachedViews = computed(() => tabsStore.cachedViews)
 .app-main {
   flex: 1;
   overflow: hidden;
-  background-color: var(--content-bg); // #f7f8fa
+  background-color: var(--content-bg);
 
   &__scrollbar {
     height: 100%;
 
     :deep(.el-scrollbar__thumb) {
-      background-color: var(--card-border); // #e8edf5
+      background-color: var(--card-border);
       border-radius: 4px;
 
       &:hover {
-        background-color: var(--text-muted); // #9aa0b0
+        background-color: var(--text-muted);
       }
+    }
+
+    :deep(.el-scrollbar__wrap) {
+      overflow-x: hidden;
+    }
+
+    :deep(.el-scrollbar__view) {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
     }
   }
 
   &__content {
     padding: 16px;
-    min-height: 100%;
+    flex: 1;
+    min-height: 0;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
   }
 }
 
