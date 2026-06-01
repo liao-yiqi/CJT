@@ -19,7 +19,7 @@ export const staticRoutes: Array<ScRouteRecordRaw> = [
     ]
   },
   {
-    path: '/loginApi',
+    path: '/login',
     component: () => import('@/views/login/index.vue'),
     hidden: true
   },

@@ -1,9 +1,8 @@
-
 import type { ScDatePickerProps } from '@/components/ScBaseFormItems/ScDatePicker'
 import type { ScDateRangeSelectorProps } from '@/components/ScSearchDateRangeSelector/ScSearchDateRangeSelector.ts'
 
-type ScSearchbarBaseItem = {
-  prop: string
+type ScSearchbarBaseItem<T> = {
+  prop: keyof T
   label?: string
   placeholder?: string
   disabled?: boolean
@@ -14,12 +13,12 @@ type ScSearchbarBaseItem = {
   componentProps?: Record<string, any>
 }
 
-export type ScSearchbarInputItem = ScSearchbarBaseItem & {
+export type ScSearchbarInputItem<T> = ScSearchbarBaseItem<T> & {
   type: 'input'
   inputType?: 'text' | 'number' | 'password'
 }
 
-export type ScSearchbarSelectItem = ScSearchbarBaseItem & {
+export type ScSearchbarSelectItem<T> = ScSearchbarBaseItem<T> & {
   type: 'select'
   options?: Array<{ label: string; value: string | number }>
   dictField?: string
@@ -27,14 +26,14 @@ export type ScSearchbarSelectItem = ScSearchbarBaseItem & {
   multiple?: boolean
 }
 
-export type ScSearchbarDateItem = ScSearchbarBaseItem & {
+export type ScSearchbarDateItem<T> = ScSearchbarBaseItem<T> & {
   type: 'date'
   dateType?: ScDatePickerProps['type']
   format?: string
   valueFormat?: string
 }
 
-export type ScSearchbarDateRangeItem = ScSearchbarBaseItem & {
+export type ScSearchbarDateRangeItem<T> = ScSearchbarBaseItem<T> & {
   type: 'dateRange'
   dateType?: ScDateRangeSelectorProps['type']
   format?: string
@@ -44,11 +43,11 @@ export type ScSearchbarDateRangeItem = ScSearchbarBaseItem & {
   rangeSeparator?: string
 }
 
-export type ScSearchbarItem =
-  | ScSearchbarInputItem
-  | ScSearchbarSelectItem
-  | ScSearchbarDateItem
-  | ScSearchbarDateRangeItem
+export type ScSearchbarItem<T = Record<string, any>> =
+  | ScSearchbarInputItem<T>
+  | ScSearchbarSelectItem<T>
+  | ScSearchbarDateItem<T>
+  | ScSearchbarDateRangeItem<T>
 
 export type ScSearchbarProps = {
   searchbarItems: Array<ScSearchbarItem>

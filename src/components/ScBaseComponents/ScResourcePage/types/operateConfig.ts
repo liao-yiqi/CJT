@@ -29,7 +29,7 @@ export interface DefaultButtonConfig {
   id?: string
   name?: string
   icon?: Component
-  type: ButtonType
+  type?: ButtonType
   disabled?: boolean
   order?: number
   tourId?: string

@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import type {
-  ScSearchbarDateItem,
-  ScSearchbarDateRangeItem,
-  ScSearchbarEmits,
-  ScSearchbarItem,
-  ScSearchbarProps,
-  ScSearchbarSelectItem
-} from './scSearchbar.ts'
+import type { ScSearchbarEmits, ScSearchbarItem, ScSearchbarProps } from './scSearchbar.ts'
 import type { Component } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import { ArrowDown, Refresh, Search } from '@element-plus/icons-vue'
@@ -53,8 +46,9 @@ const updateField = (prop: string, value: any) => {
 }
 
 const getComponentProps = (item: ScSearchbarItem): Record<string, any> => {
+  const prop = item.prop as string
   const base: Record<string, any> = {
-    modelValue: props.modelValue[item.prop],
+    modelValue: props.modelValue[prop],
     clearable: item.clearable ?? true,
     disabled: item.disabled,
     size: props.size
@@ -65,30 +59,27 @@ const getComponentProps = (item: ScSearchbarItem): Record<string, any> => {
       base.type = item.inputType ?? 'text'
       break
     case 'select': {
-      const s = item as ScSearchbarSelectItem
       base.placeholder = item.placeholder ?? `请选择${item.label ?? ''}`
-      base.options = s.options
-      base.dictField = s.dictField
-      base.filterable = s.filterable
-      base.multiple = s.multiple
+      base.options = item.options
+      base.dictField = item.dictField
+      base.filterable = item.filterable
+      base.multiple = item.multiple
       break
     }
     case 'date': {
-      const d = item as ScSearchbarDateItem
       base.placeholder = item.placeholder ?? `请选择${item.label ?? ''}`
-      base.type = d.dateType ?? 'date'
-      base.format = d.format
-      base.valueFormat = d.valueFormat
+      base.type = item.dateType ?? 'date'
+      base.format = item.format
+      base.valueFormat = item.valueFormat
       break
     }
     case 'dateRange': {
-      const dr = item as ScSearchbarDateRangeItem
-      base.type = dr.dateType ?? 'daterange'
-      base.format = dr.format
-      base.valueFormat = dr.valueFormat
-      base.startPlaceholder = dr.startPlaceholder ?? `开始${item.label ?? ''}`
-      base.endPlaceholder = dr.endPlaceholder ?? `结束${item.label ?? ''}`
-      base.rangeSeparator = dr.rangeSeparator
+      base.type = item.dateType ?? 'daterange'
+      base.format = item.format
+      base.valueFormat = item.valueFormat
+      base.startPlaceholder = item.startPlaceholder ?? `开始${item.label ?? ''}`
+      base.endPlaceholder = item.endPlaceholder ?? `结束${item.label ?? ''}`
+      base.rangeSeparator = item.rangeSeparator
       break
     }
   }
@@ -96,7 +87,7 @@ const getComponentProps = (item: ScSearchbarItem): Record<string, any> => {
 }
 
 const getComponentEvents = (item: ScSearchbarItem) => ({
-  'update:modelValue': (value: any) => updateField(item.prop, value),
+  'update:modelValue': (value: any) => updateField(item.prop as string, value),
   ...(item.type === 'input'
     ? {
         keyup: (e: KeyboardEvent) => {
@@ -106,7 +97,6 @@ const getComponentEvents = (item: ScSearchbarItem) => ({
     : {})
 })
 
-
 const handleSearch = useDebounceFn(() => {
   emit('search', { ...props.modelValue })
 }, props.debounceDelay)
@@ -114,7 +104,7 @@ const handleSearch = useDebounceFn(() => {
 const handleReset = () => {
   props.searchbarItems.forEach(item => {
     // dateRange 的值类型是 [string, string] | undefined，其余统一置空字符串
-    props.modelValue[item.prop] = item.type === 'dateRange' ? undefined : ''
+    props.modelValue[item.prop as string] = item.type === 'dateRange' ? undefined : null
   })
   emit('update:modelValue', { ...props.modelValue })
   emit('reset')

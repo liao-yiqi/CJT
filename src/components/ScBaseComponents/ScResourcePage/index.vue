@@ -22,7 +22,7 @@ const emit = defineEmits<ScResourcePageEmits>()
 const initSearchFormData = (): Record<string, any> => {
   const formData: Record<string, any> = {}
   props.pageConfig.searchConfig.searchbarItems.forEach(i => {
-    formData[i.prop] = i.type === 'dateRange' ? undefined : ''
+    formData[i.prop] = i.type === 'dateRange' ? undefined : null
   })
   return formData
 }
@@ -33,7 +33,6 @@ const searchFormData = ref<Record<string, any>>(initSearchFormData())
 // 搜索
 const handleSearch = () => {
   fetchTableData()
-  console.log('handleSearch', searchFormData.value)
 }
 
 // 刷新
@@ -213,6 +212,7 @@ defineExpose<ScResourcePageInstance>({
         :action-width="200"
         :table-columns="visibleColumns"
         :total="tableTotal"
+        :loading="loading"
         :tree-config="props.pageConfig.treeConfig"
         :show-action="showActionColumn"
         :show-pagination="props.pageConfig.tableConfig.showPagination"

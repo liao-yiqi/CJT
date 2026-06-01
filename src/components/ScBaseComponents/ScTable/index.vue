@@ -175,7 +175,6 @@ defineExpose<ScTableInstance>({
         </template>
       </el-table>
     </div>
-    <!-- 分页 -->
     <div v-if="showPagination && data.length !== 0" class="pagination-content">
       <el-pagination
         v-model:current-page="currentPage"

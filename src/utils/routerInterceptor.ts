@@ -3,13 +3,16 @@ import { getToken } from './auth'
 import { useUserStore } from '@/store/modules/user-store.ts'
 import { ElMessage } from 'element-plus'
 import { isRelogin } from './request/handler/errorHandler'
-import { useGenerateProcessRouterStore, useGenerateRoutesStore } from '@/store/modules/router-store.ts'
+import {
+  useGenerateProcessRouterStore,
+  useGenerateRoutesStore
+} from '@/store/modules/router-store.ts'
 import { isHttp } from './validate'
 import NProgress from 'nprogress'
 import pageLoader from '@/utils/pageLoader'
 import { useGlobalStore } from '@/store/modules/global-store.ts'
 
-const whiteList = new Set(['/loginApi'])
+const whiteList = new Set(['/login'])
 
 export const beforeEach = (router: Router) => {
   router.beforeEach(async (to, _from, next) => {
@@ -21,7 +24,7 @@ export const beforeEach = (router: Router) => {
     }
     if (getToken()) {
       document.title = import.meta.env.VITE_APP_TITLE
-      if (to.path === '/loginApi') {
+      if (to.path === '/login') {
         next({ path: '/' })
         return
       }

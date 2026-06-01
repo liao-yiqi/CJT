@@ -14,7 +14,7 @@ export const useTableData = (
   const { loading, startLoading, stopLoading } = useLoading()
 
   const fetchTableData = async () => {
-    const { showPagination } = getPageConfig().tableConfig
+    const { showPagination = true } = getPageConfig().tableConfig
     try {
       startLoading()
       const pageParams = {
