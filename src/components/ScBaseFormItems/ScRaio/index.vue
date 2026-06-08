@@ -39,7 +39,7 @@ const initRadioOptions = async () => {
       radioOptions.value = formatterDictData(dictData)
     } else {
       // 使用默认的radioOptions
-      radioOptions.value = formatterDictData(dictData)
+      radioOptions.value = props.radioOptions
     }
   }
 }
