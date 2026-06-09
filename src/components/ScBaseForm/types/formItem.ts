@@ -1,0 +1,69 @@
+import type { FormItemRule } from 'element-plus'
+import type {
+  ScFormCheckboxProps,
+  ScFormDateProps,
+  ScFormDateRangeProps,
+  ScFormInputProps,
+  ScFormRadioProps,
+  ScFormSelectProps,
+  ScFormSwitchProps
+} from './componentProps.ts'
+
+interface ScBaseFormItemBase {
+  prop: string
+  label?: string
+  rules?: FormItemRule | FormItemRule[]
+  customSlot?: string
+  hide?: (formData: Record<string, any>) => boolean
+  groupName?: string
+}
+
+export interface ScBaseFormInputItem extends ScBaseFormItemBase {
+  type: 'input'
+  componentProps?: ScFormInputProps
+}
+
+export interface ScBaseFormSelectItem extends ScBaseFormItemBase {
+  type: 'select'
+  componentProps?: ScFormSelectProps
+}
+
+export interface ScBaseFormDateItem extends ScBaseFormItemBase {
+  type: 'date'
+  componentProps?: ScFormDateProps
+}
+
+export interface ScBaseFormDateRangeItem extends ScBaseFormItemBase {
+  type: 'dateRange'
+  componentProps?: ScFormDateRangeProps
+}
+
+export interface ScBaseFormRadioItem extends ScBaseFormItemBase {
+  type: 'radio'
+  componentProps?: ScFormRadioProps
+}
+
+export interface ScBaseFormCheckboxItem extends ScBaseFormItemBase {
+  type: 'checkbox'
+  componentProps?: ScFormCheckboxProps
+}
+
+export interface ScBaseFormSwitchItem extends ScBaseFormItemBase {
+  type: 'switch'
+  componentProps?: ScFormSwitchProps
+}
+
+export interface ScBaseFormCustomItem extends ScBaseFormItemBase {
+  type?: never
+  customSlot: string
+}
+
+export type ScBaseFormItem =
+  | ScBaseFormInputItem
+  | ScBaseFormSelectItem
+  | ScBaseFormDateItem
+  | ScBaseFormDateRangeItem
+  | ScBaseFormRadioItem
+  | ScBaseFormCheckboxItem
+  | ScBaseFormSwitchItem
+  | ScBaseFormCustomItem

@@ -7,7 +7,9 @@ const props = withDefaults(defineProps<ScSwitchProps>(), {
   inactiveText: '',
   activeText: '',
   inlinePrompt: true,
-  disabled: false
+  disabled: false,
+  activeValue: true,
+  inactiveValue: false
 })
 
 const emit = defineEmits<ScSwitchEmits>()
@@ -24,9 +26,9 @@ const switchValue = computed({
     :inactive-text="inactiveText"
     :active-text="activeText"
     :inlinePrompt="inlinePrompt"
-    :active-value="props.activeValue"
-    :inactive-value="props.inactiveValue"
     :disabled="disabled"
+    :active-value="activeValue"
+    :inactive-value="inactiveValue"
   />
 </template>
 
