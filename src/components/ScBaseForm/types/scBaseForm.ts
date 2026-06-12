@@ -6,6 +6,7 @@ export interface ScBaseFormProps {
   inline?: boolean
   formItems: Array<ScBaseFormItem>
   isGroup?: boolean
+  columns?: number
 }
 
 export interface ScBaseFormInstance {

@@ -17,7 +17,8 @@ defineOptions({ name: 'ScBaseForm' })
 const props = withDefaults(defineProps<ScBaseFormProps>(), {
   labelWidth: '110px',
   inline: false,
-  isGroup: false
+  isGroup: false,
+  columns: 2
 })
 
 // 表单规则
@@ -117,13 +118,18 @@ defineExpose<ScBaseFormInstance>({
             <ArrowUp />
           </el-icon>
         </div>
-        <div v-show="!collapsedMap[groupName]" class="form-group__body">
+        <div
+          v-show="!collapsedMap[groupName]"
+          class="form-group__body"
+          :style="{ '--form-columns': columns }"
+        >
           <el-form-item
             v-for="item in items"
+            v-show="!item.hide?.(modelValue)"
             :key="item.prop"
             :label="item.label"
             :prop="item.prop"
-            v-show="!item.hide?.(modelValue)"
+            :style="item.colSpan ? { 'grid-column': `span ${item.colSpan}` } : {}"
           >
             <slot
               v-if="item.customSlot"
@@ -145,27 +151,30 @@ defineExpose<ScBaseFormInstance>({
 
     <!-- 非分组模式 -->
     <template v-else>
-      <el-form-item
-        v-for="item in formItems"
-        :key="item.prop"
-        :label="item.label"
-        :prop="item.prop"
-        v-show="!item.hide?.(modelValue)"
-      >
-        <slot
-          v-if="item.customSlot"
-          :name="`custom-${item.customSlot}`"
-          :item="item"
-          :data="modelValue"
-        />
-        <component
-          v-else-if="item.type && componentMap[item.type]"
-          :is="componentMap[item.type]"
-          v-bind="item.componentProps"
-          :modelValue="modelValue[item.prop]"
-          @update:modelValue="modelValue[item.prop] = $event"
-        />
-      </el-form-item>
+      <div class="form-body" :style="{ '--form-columns': columns }">
+        <el-form-item
+          v-for="item in formItems"
+          v-show="!item.hide?.(modelValue)"
+          :key="item.prop"
+          :label="item.label"
+          :prop="item.prop"
+          :style="item.colSpan ? { 'grid-column': `span ${item.colSpan}` } : {}"
+        >
+          <slot
+            v-if="item.customSlot"
+            :name="`custom-${item.customSlot}`"
+            :item="item"
+            :data="modelValue"
+          />
+          <component
+            v-else-if="item.type && componentMap[item.type]"
+            :is="componentMap[item.type]"
+            v-bind="item.componentProps"
+            :modelValue="modelValue[item.prop]"
+            @update:modelValue="modelValue[item.prop] = $event"
+          />
+        </el-form-item>
+      </div>
     </template>
   </el-form>
 </template>
@@ -203,5 +212,13 @@ defineExpose<ScBaseFormInstance>({
   &__body {
     padding: 0 12px;
   }
+}
+
+.form-body,
+.form-group__body {
+  display: grid;
+  grid-template-columns: repeat(var(--form-columns, 2), 1fr);
+  column-gap: 16px;
+  align-items: start;
 }
 </style>
