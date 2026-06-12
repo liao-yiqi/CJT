@@ -34,3 +34,5 @@ type PaginationParams = {
   pageNum: number
   pageSize: number
 }
+// 列表请求参数
+type ListQuery<T = object> = PaginationParams & T

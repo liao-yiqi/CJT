@@ -16,6 +16,7 @@ interface ScBaseFormItemBase {
   customSlot?: string
   hide?: (formData: Record<string, any>) => boolean
   groupName?: string
+  colSpan?: number
 }
 
 export interface ScBaseFormInputItem extends ScBaseFormItemBase {

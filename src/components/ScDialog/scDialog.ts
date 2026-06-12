@@ -1,4 +1,6 @@
 export interface ScDialogProps {
+  // 弹窗控制
+  modelValue: boolean
   // 弹窗标题
   title?: string
   // 确认按钮文本
@@ -18,4 +20,7 @@ export interface ScDialogProps {
 export interface ScDialogEmits {
   (e: 'confirm'): void
   (e: 'cancel'): void
+  (e: 'update:modelValue', val: boolean): void
+  (e: 'closed'): void
+  (e: 'open'): void
 }
