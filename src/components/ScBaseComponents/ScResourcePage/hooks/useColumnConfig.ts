@@ -1,7 +1,7 @@
-import type { TableColumn } from '@/components/ScBaseComponents'
+import type { ScTableColumn } from '@/components/ScBaseComponents'
 
 export const useColumnConfig = (
-  getTableColumns: () => Array<TableColumn>,
+  getTableColumns: () => Array<ScTableColumn>,
   getShowActionColumn: () => boolean | undefined
 ) => {
   const selectedColumns = ref<Array<string>>([])

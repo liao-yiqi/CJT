@@ -29,47 +29,6 @@ export const staticRoutes: Array<ScRouteRecordRaw> = [
     hidden: true
   },
   {
-    path: '',
-    component: Layout,
-    children: [
-      {
-        path: '/test1',
-        component: () => import('@/views/test/test1.vue'),
-        meta: { title: '测试菜单1' }
-      }
-    ]
-  },
-  {
-    path: '',
-    component: Layout,
-    children: [
-      {
-        path: '/test2',
-        component: () => import('@/views/test/test2.vue'),
-        meta: { title: '测试菜单2' }
-      }
-    ]
-  },
-  {
-    path: '/first',
-    component: Layout,
-    meta: { title: '多级菜单' },
-    children: [
-      {
-        path: 'test3',
-        name: 'test3',
-        component: () => import('@/views/test/test3.vue'),
-        meta: { title: '测试菜单3' }
-      },
-      {
-        path: 'test4',
-        name: 'test4',
-        component: () => import('@/views/test/test4.vue'),
-        meta: { title: '测试菜单4' }
-      }
-    ]
-  },
-  {
     path: '/:pathMatch(.*)*',
     component: () => import('@/views/error/404.vue'),
     hidden: true

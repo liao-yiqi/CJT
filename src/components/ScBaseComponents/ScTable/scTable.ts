@@ -1,6 +1,6 @@
 type TableData = string | number | boolean | null
 
-export interface TableColumn {
+export interface ScTableColumn {
   prop: string
   label: string
   width?: string | number
@@ -24,7 +24,7 @@ export interface TreeConfig {
 export interface ScTableProps {
   // 基础配置
   data: Array<Record<string, TableData>>
-  tableColumns: Array<TableColumn>
+  tableColumns: Array<ScTableColumn>
   loading?: boolean
   border?: boolean
   stripe?: boolean

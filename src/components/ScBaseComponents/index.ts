@@ -4,8 +4,13 @@ import ScSearchbar from './ScSearchbar'
 import ScResourcePage from './ScResourcePage'
 
 export type { ScButtonProps } from './ScButton'
-export type { ScTableProps, TableColumn } from './ScTable'
+export type { ScTableProps, ScTableColumn } from './ScTable'
 export type { ScSearchbarItem } from './ScSearchbar'
-export type { ScResourcePageProps, TreeConfig, ScResourcePageConfig } from './ScResourcePage'
+export type {
+  ScResourcePageProps,
+  TreeConfig,
+  ScResourcePageConfig,
+  ScResourcePageInstance
+} from './ScResourcePage'
 
 export { ScButton, ScTable, ScSearchbar, ScResourcePage }

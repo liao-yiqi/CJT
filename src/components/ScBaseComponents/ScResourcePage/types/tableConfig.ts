@@ -1,8 +1,8 @@
-import type { TableColumn } from '@/components/ScBaseComponents/ScTable'
+import type { ScTableColumn } from '@/components/ScBaseComponents/ScTable'
 import type { ButtonType } from 'element-plus'
 
 export interface TableConfig<TRow = Record<string, any>> {
-  tableColumns: Array<TableColumn>
+  tableColumns: Array<ScTableColumn>
   /** 是否显示操作列，默认为true */
   showActionColumn?: boolean
   /** 操作列自定义按钮 */

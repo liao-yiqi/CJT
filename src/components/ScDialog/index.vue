@@ -15,14 +15,17 @@ const props = withDefaults(defineProps<ScDialogProps>(), {
 
 const emit = defineEmits<ScDialogEmits>()
 
-const visible = defineModel<boolean>('visible', { required: true })
+const visible = computed({
+  get: () => props.modelValue,
+  set: val => emit('update:modelValue', val)
+})
 
 const handleConfirm = () => {
   emit('confirm')
 }
 
 const handleCancel = () => {
-  visible.value = false
+  emit('update:modelValue', false)
   emit('cancel')
 }
 </script>
@@ -37,6 +40,8 @@ const handleCancel = () => {
     :draggable="draggable"
     :fullscreen="fullscreen"
     @close="handleCancel"
+    @closed="emit('closed')"
+    @open="emit('open')"
   >
     <!-- 自定义 header slot -->
     <template v-if="$slots.header" #header="slotProps">
@@ -53,14 +58,14 @@ const handleCancel = () => {
           <ScButton :icon="CircleCloseFilled" @click="handleCancel" type="warning">
             {{ cancelText }}
           </ScButton>
-          <ScButton
+          <el-button
             :icon="CircleCheckFilled"
             type="danger"
             :loading="confirmLoading"
             @click="handleConfirm"
           >
             {{ confirmText }}
-          </ScButton>
+          </el-button>
         </div>
       </slot>
     </template>
