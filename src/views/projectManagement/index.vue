@@ -1,134 +1,86 @@
 <script setup lang="ts">
-import { defineFormItems } from '@/utils/form.ts'
-import { useTemplateRef } from 'vue'
-import type { ScBaseFormInstance } from '@/components/ScBaseForm'
+import type { ScResourcePageConfig } from '@/components/ScBaseComponents/ScResourcePage'
+import type { ScTableColumn } from '@/components/ScBaseComponents'
+import { getProjectManagementList } from '@/api/projectManagement-api.ts'
+import type {
+  ProjectManagementData,
+  ProjectManagementSearchParams
+} from '@/types/projectManagement'
 
-type FormData = {
-  inputValue1: string
-  inputValue2: number
-  customInputValue: string
-  textareaValue: string
-  selectValue1: string
-  checkboxValue: Array<string>
-  radioValue: string | undefined
-  dateValue: string
-  dateRangeValue: [string, string] | undefined
-  switchValue: boolean
-}
-
-const formData = reactive<FormData>({
-  inputValue1: '',
-  inputValue2: 0,
-  customInputValue: '',
-  textareaValue: '',
-  selectValue1: '',
-  checkboxValue: [],
-  radioValue: undefined,
-  dateValue: '',
-  dateRangeValue: undefined,
-  switchValue: false
-})
-
-const formItems = defineFormItems<FormData>([
+const searchbarItems = reactive<Array<ScSearchbarItem<ProjectManagementSearchParams>>>([
   {
-    label: '输入框',
-    prop: 'inputValue1',
-    type: 'input',
-    groupName: '分组1'
+    prop: 'name',
+    label: '项目名称',
+    type: 'input'
   },
   {
-    label: '数字框',
-    prop: 'inputValue2',
-    type: 'input',
-    componentProps: {
-      type: 'number'
-    },
-    hide: (data: FormData) => data.selectValue1 === '5',
-    groupName: '分组1'
-  },
-  {
-    label: '自定义文本框',
-    prop: 'customInputValue',
-    customSlot: 'cInput',
-    groupName: '分组1'
-  },
-  {
-    label: '文本域',
-    prop: 'textareaValue',
-    type: 'input',
-    componentProps: {
-      type: 'textarea'
-    },
-    groupName: '分组2'
-  },
-  {
-    label: '选择框',
-    prop: 'selectValue1',
+    prop: 'largeType',
+    label: '项目大类',
     type: 'select',
-    componentProps: {
-      dictField: 'background_subject_type'
-    },
-    groupName: '分组2'
+    dictField: 'background_subject_type'
   },
   {
-    label: '多选框',
-    prop: 'checkboxValue',
-    type: 'checkbox',
-    componentProps: {
-      dictField: 'background_subject_type'
-    },
-    rules: [{ required: true }],
-    groupName: '分组3'
-  },
-  {
-    label: '单选框',
-    prop: 'radioValue',
-    type: 'radio',
-    componentProps: {
-      dictField: 'background_subject_type'
-    },
-    rules: [{ required: true }],
-    groupName: '分组3'
-  },
-  {
-    label: '日期选择',
-    prop: 'dateValue',
-    type: 'date',
-    groupName: '分组3'
-  },
-  {
-    label: '日期范围选择',
-    prop: 'dateRangeValue',
-    type: 'dateRange',
-  },
-  {
-    label: 'switch',
-    prop: 'switchValue',
-    type: 'switch',
+    prop: 'type',
+    label: '项目类型',
+    type: 'select',
+    dictField: 'background_subject_second_type'
   }
 ])
 
-const scBaseFormRef = useTemplateRef<ScBaseFormInstance>('scBaseFormRef')
-const handleClick = async () => {
-  await scBaseFormRef.value?.validate()
-  console.log(formData)
-}
+const tableColumn = ref<Array<ScTableColumn>>([
+  {
+    prop: 'code',
+    label: '项目编号'
+  },
+  {
+    prop: 'name',
+    label: '项目名称'
+  },
+  {
+    prop: 'assessAddress',
+    label: '测试地址'
+  },
+  {
+    prop: 'assessMethodLabel',
+    label: '测试方式'
+  },
+  {
+    prop: 'typeLabel',
+    label: '项目类型'
+  },
+  {
+    prop: 'reportCreatorName',
+    label: '报告编制人'
+  },
+  {
+    prop: 'reportTime',
+    label: '报告编制时间'
+  }
+])
 
-const handleClick1 = async () => {
-  scBaseFormRef.value?.clearValidate()
-  scBaseFormRef.value?.resetFields()
+const pageConfig: ScResourcePageConfig<ProjectManagementData> = {
+  searchConfig: {
+    searchbarItems: searchbarItems
+  },
+  operateConfig: {
+    defaultButtonsConfig: {
+      add: { permission: 'background:subject:add' }
+    }
+  },
+  tableConfig: {
+    tableColumns: tableColumn.value,
+    defaultButtonsConfig: {
+      edit: { permission: 'background:subject:edit' },
+      delete: { permission: 'background:subject:remove' }
+    }
+  },
+  fetchData: getProjectManagementList
 }
 </script>
 
 <template>
   <div class="page-card">
-    <ScBaseForm ref="scBaseFormRef" v-model="formData" :form-items="formItems" is-group>
-      <template #custom-cInput>
-        <ScInput v-model="formData.customInputValue" />
-      </template>
-    </ScBaseForm>
-    <el-button @click="handleClick" class="m-t-10">submit</el-button>
-    <el-button @click="handleClick1" class="m-t-10">submit</el-button>
+    <ScResourcePage :page-config="pageConfig" />
   </div>
 </template>
 

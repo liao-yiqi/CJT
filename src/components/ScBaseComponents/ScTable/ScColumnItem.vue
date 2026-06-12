@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { TableColumn } from './scTable.ts'
+import type { ScTableColumn } from './scTable.ts'
 
 const props = defineProps<{
-  columnItem: TableColumn
+  columnItem: ScTableColumn
 }>()
 
 const { columnItem } = toRefs(props)
