@@ -10,11 +10,9 @@ const cachedViews = computed(() => tabsStore.cachedViews)
     <el-scrollbar class="app-main__scrollbar">
       <div class="app-main__content">
         <router-view v-slot="{ Component, route }">
-          <transition name="fade" mode="out-in">
             <keep-alive :include="cachedViews">
               <component :is="Component" :key="route.fullPath" />
             </keep-alive>
-          </transition>
         </router-view>
       </div>
     </el-scrollbar>
