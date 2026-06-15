@@ -2,6 +2,7 @@ import { ScMessage } from '@/utils/ElUtils'
 
 interface UseDialogFormOptions<T extends Record<string, any>> {
   defaultFormData: T
+  title: string
   fetchDetail?: (id: string) => Promise<any>
   onCreate: (data: T) => Promise<any>
   onUpdate: (data: T & { id: string }) => Promise<any>
@@ -76,10 +77,15 @@ export const useDialogForm = <T extends Record<string, any>>(options: UseDialogF
     }
   }
 
+  const dialogTitle = computed(() =>
+    currentId.value ? `编辑${options.title}` : `新增${options.title}`
+  )
+
   return {
     visible,
     formData,
     confirmLoading,
+    dialogTitle,
     open,
     handleConfirm
   }

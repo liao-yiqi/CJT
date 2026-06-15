@@ -80,13 +80,18 @@ const formItems = defineFormItems<IndustryStandardFormData>([
   { label: '颁布时间', prop: 'promulgationDate', type: 'date' },
   { label: '实施时间', prop: 'implementationDate', type: 'date' },
   { label: '颁布部门', prop: 'promulgationDept', type: 'input' },
-  { label: '优先级', prop: 'priority', type: 'input', componentProps: { type: 'number' } }
+  {
+    label: '优先级',
+    prop: 'priority',
+    type: 'input',
+    componentProps: { type: 'number' }
+  }
 ])
 
-const pageDialogConfig: DialogFormConfig = {
+const pageDialogConfig = computed<DialogFormConfig>(() => ({
   formItems,
   title: '行业/标准'
-}
+}))
 
 const scResourcePageRef = useTemplateRef<PageInstance>('scResourcePageRef')
 
@@ -105,6 +110,7 @@ const { handleDelete } = useDeleteAction<IndustryStandardFormData>(
 const { visible, formData, confirmLoading, open, handleConfirm } =
   useDialogForm<IndustryStandardFormData>({
     defaultFormData: dialogFormData,
+    title: '行业/标准',
     fetchDetail: id => getIndustryStandardDetailAPI(id),
     onCreate: data => createIndustryStandardAPI(data),
     onUpdate: data => updateIndustryStandardAPI(data),

@@ -15,14 +15,21 @@ export const createIndustryStandardAPI = (data: IndustryStandardFormData) => {
   return request.post<BaseResponse>({ url: '/background/standard', data })
 }
 
-export const updateIndustryStandardAPI = (data: IndustryStandardFormData & { id: string }) => {
+export const updateIndustryStandardAPI = (
+  data: IndustryStandardFormData & { id: string }
+) => {
   return request.put<BaseResponse>({ url: '/background/standard', data })
 }
 
 export const getIndustryStandardDetailAPI = (id: string) => {
-  return request.get<DataResponse<IndustryStandardData>>({ url: `/background/standard/${id}` })
+  return request.get<DataResponse<IndustryStandardData>>({
+    url: `/background/standard/${id}`
+  })
 }
 
 export const deleteIndustryStandardAPI = (data: { ids: Array<string> }) => {
-  return request.post<BaseResponse>({ url: '/background/standard/delete', data })
+  return request.post<BaseResponse>({
+    url: '/background/standard/delete',
+    data
+  })
 }
