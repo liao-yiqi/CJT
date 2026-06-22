@@ -2,7 +2,7 @@ import type { ExportConfig } from '@/components/ScBaseComponents/ScResourcePage'
 import { useDownloadFilesStore } from '@/store/modules/download-store.ts'
 import { ElMessage, type MessageHandler } from 'element-plus'
 import { isJsonBlob } from '@/utils/validate.ts'
-import { downloadFile } from '@/utils/public.ts'
+import { downloadFile } from '@/utils/file.ts'
 
 export const useExport = (
   getExportConfig: () => ExportConfig | undefined,

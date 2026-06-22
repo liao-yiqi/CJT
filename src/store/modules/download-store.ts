@@ -1,4 +1,4 @@
-import { downloadFileAPI } from '@/api/download-api.ts'
+import { downloadFileAPI } from '@/api/file-api.ts'
 import type { AxiosResponse } from 'axios'
 
 export const useDownloadFilesStore = defineStore('downloadFile', () => {
