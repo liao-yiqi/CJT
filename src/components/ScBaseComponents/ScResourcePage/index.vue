@@ -1,12 +1,21 @@
 <script setup lang="ts">
-import type { ScResourcePageProps, ScResourcePageEmits, ScResourcePageInstance } from './types'
+import type {
+  ScResourcePageProps,
+  ScResourcePageEmits,
+  ScResourcePageInstance
+} from './types'
 import { useOperateButtons } from './hooks/useOperateButtons.ts'
 import { useExport } from '@/components/ScBaseComponents/ScResourcePage/hooks/useExport.ts'
 import { useTreeExpand } from '@/components/ScBaseComponents/ScResourcePage/hooks/useTreeExpand.ts'
 import { useTableData } from '@/components/ScBaseComponents/ScResourcePage/hooks/useTableData.ts'
 import { useTemplateRef } from 'vue'
 import type { TableInstance } from 'element-plus'
-import { ArrowDown, ArrowUp, RefreshLeft, Setting } from '@element-plus/icons-vue'
+import {
+  ArrowDown,
+  ArrowUp,
+  RefreshLeft,
+  Setting
+} from '@element-plus/icons-vue'
 import { useColumnConfig } from '@/components/ScBaseComponents/ScResourcePage/hooks/useColumnConfig.ts'
 import { useActionButtons } from '@/components/ScBaseComponents/ScResourcePage/hooks/useActionButtons.ts'
 
@@ -24,7 +33,7 @@ const initSearchFormData = (): Record<string, any> => {
   props.pageConfig.searchConfig.searchbarItems.forEach(i => {
     formData[i.prop] = i.type === 'dateRange' ? undefined : null
   })
-  return formData
+  return { ...formData, ...props.pageConfig.searchConfig.searchExtraParams }
 }
 
 // 搜索表单
@@ -57,10 +66,11 @@ const { allButtons, handleBtnClick } = useOperateButtons(
 const tableRef = useTemplateRef<TableInstance>('tableRef')
 
 // 表格配置
-const { tableData, tableTotal, loading, fetchTableData, handlePageChange } = useTableData(
-  () => props.pageConfig,
-  () => searchFormData.value
-)
+const { tableData, tableTotal, loading, fetchTableData, handlePageChange } =
+  useTableData(
+    () => props.pageConfig,
+    () => searchFormData.value
+  )
 
 // 树形操作
 const { isAllExpanded, toggleExpandAll } = useTreeExpand(
@@ -70,19 +80,25 @@ const { isAllExpanded, toggleExpandAll } = useTreeExpand(
 )
 
 // 列配置
-const { selectedColumns, showActionColumn, visibleColumns, initSelectedColumns } = useColumnConfig(
+const {
+  selectedColumns,
+  showActionColumn,
+  visibleColumns,
+  initSelectedColumns
+} = useColumnConfig(
   () => props.pageConfig.tableConfig.tableColumns,
   () => props.pageConfig.tableConfig.showActionColumn
 )
 
 // 操作列按钮
-const { allActionButtons, isButtonDisabled, resolveButtonName } = useActionButtons(
-  () => props.pageConfig.tableConfig.customActionButtons,
-  () => props.pageConfig.tableConfig.showDefaultButtons,
-  row => emit('edit', row),
-  row => emit('delete', row),
-  () => props.pageConfig.tableConfig.defaultButtonsConfig
-)
+const { allActionButtons, isButtonDisabled, resolveButtonName } =
+  useActionButtons(
+    () => props.pageConfig.tableConfig.customActionButtons,
+    () => props.pageConfig.tableConfig.showDefaultButtons,
+    row => emit('edit', row),
+    row => emit('delete', row),
+    () => props.pageConfig.tableConfig.defaultButtonsConfig
+  )
 
 onMounted(() => {
   initSelectedColumns()
@@ -150,7 +166,12 @@ defineExpose<ScResourcePageInstance>({
     </div>
     <div class="page-operate-content">
       <div class="base-btn-list">
-        <div class="btn-item" v-for="item in allButtons" :key="item.id" :data-tour="item.tourId">
+        <div
+          class="btn-item"
+          v-for="item in allButtons"
+          :key="item.id"
+          :data-tour="item.tourId"
+        >
           <ScButton
             :type="item.type"
             :text="item.text"
@@ -242,7 +263,11 @@ defineExpose<ScResourcePageInstance>({
           :key="slotName"
           #[transformSlotName(slotName)]="slotProps"
         >
-          <slot v-if="isCustomSlot(slotName)" :name="slotName" v-bind="slotProps" />
+          <slot
+            v-if="isCustomSlot(slotName)"
+            :name="slotName"
+            v-bind="slotProps"
+          />
         </template>
       </ScTable>
     </div>
