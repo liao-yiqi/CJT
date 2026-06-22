@@ -1,10 +1,19 @@
 import type { ScInputType } from '@/components/ScBaseFormItems/ScInput/scInput.ts'
-import type { CustomConfig, ScSelectOption } from '@/components/ScBaseFormItems/ScSelect'
+import type {
+  CustomConfig,
+  ScSelectOption
+} from '@/components/ScBaseFormItems/ScSelect'
 import type { DictOption } from '@/types/dict'
 import type { ScDatePickerType } from '@/components/ScBaseFormItems/ScDatePicker'
 import type { ScDateRangePickerType } from '@/components/ScBaseFormItems/ScDateRangePicker'
-import type { ScRadioFieldName, ScRadioOption } from '@/components/ScBaseFormItems/ScRadio'
-import type { ScCheckboxFieldName, ScCheckboxOption } from '@/components/ScBaseFormItems/ScCheckbox'
+import type {
+  ScRadioFieldName,
+  ScRadioOption
+} from '@/components/ScBaseFormItems/ScRadio'
+import type {
+  ScCheckboxFieldName,
+  ScCheckboxOption
+} from '@/components/ScBaseFormItems/ScCheckbox'
 
 export interface ScFormInputProps {
   type?: ScInputType
@@ -17,6 +26,7 @@ export interface ScFormInputProps {
   prefixIcon?: string
   suffixIcon?: string
   autosize?: boolean
+  rows?: number
 }
 
 export interface ScFormSelectProps {

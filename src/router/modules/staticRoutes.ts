@@ -32,5 +32,20 @@ export const staticRoutes: Array<ScRouteRecordRaw> = [
     path: '/:pathMatch(.*)*',
     component: () => import('@/views/error/404.vue'),
     hidden: true
+  },
+  {
+    path: '/controlPoint',
+    hidden: true,
+    component: Layout,
+    permissions: ['background:point:list'],
+    meta: { title: '测评项详情', activeMenu: '/controlPoint/controlPointItem' },
+    children: [
+      {
+        path: 'controlPointItem',
+        name: 'ControlPointItem',
+        component: () =>
+          import('@/views/adminManagement/controlPoint/controlPointItem.vue')
+      }
+    ]
   }
 ]
