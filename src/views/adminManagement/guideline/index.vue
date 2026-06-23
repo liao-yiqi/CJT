@@ -18,6 +18,7 @@ import { defineFormItems } from '@/utils/form.ts'
 import { findFormSelectItem } from '@/utils/formItemUtils.ts'
 import { useDialogForm } from '@/hooks/useDialogForm.ts'
 import { useDeleteAction } from '@/hooks/useDeleteAction.ts'
+
 const searchbarItems = reactive<SearchbarItems<GuidelineSearchParams>>([
   {
     label: '指导书名称',
@@ -53,7 +54,16 @@ const tableColumns = reactive<TableColumns>([
 
 const pageConfig: PageConfig<GuidelineData> = {
   searchConfig: { searchbarItems },
-  tableConfig: { tableColumns },
+  operateConfig: {
+    defaultButtonsConfig: { add: { permission: 'background:guide:add' } }
+  },
+  tableConfig: {
+    tableColumns,
+    defaultButtonsConfig: {
+      edit: { permission: 'background:guide:edit' },
+      delete: { permission: 'background:guide:remove' }
+    }
+  },
   fetchData: getGuidelineDataAPI
 }
 

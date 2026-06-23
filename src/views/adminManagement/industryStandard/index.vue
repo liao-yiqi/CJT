@@ -49,8 +49,15 @@ const tableColumns = reactive<TableColumns>([
 
 const pageConfig: PageConfig<IndustryStandardData> = {
   searchConfig: { searchbarItems },
+  operateConfig: {
+    defaultButtonsConfig: { add: { permission: 'background:standard:add' } }
+  },
   tableConfig: {
-    tableColumns
+    tableColumns,
+    defaultButtonsConfig: {
+      edit: { permission: 'background:standard:edit' },
+      delete: { permission: 'background:standard:remove' }
+    }
   },
   fetchData: getIndustryStandardDataAPI
 }

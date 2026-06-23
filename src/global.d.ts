@@ -36,3 +36,11 @@ type PaginationParams = {
 }
 // 列表请求参数
 type ListQuery<T = object> = PaginationParams & T
+
+// 表格数据通用返回类型
+type CommonTableData = {
+  id: string
+  createTime: string
+  createBy: string
+  sort: number
+}

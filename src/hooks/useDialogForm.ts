@@ -1,4 +1,5 @@
 import { ScMessage } from '@/utils/ElUtils'
+import { assignObject } from '@/utils/object.ts'
 
 interface UseDialogFormOptions<T extends Record<string, any>> {
   defaultFormData: T
@@ -7,6 +8,7 @@ interface UseDialogFormOptions<T extends Record<string, any>> {
   onCreate: (data: T) => Promise<any>
   onUpdate: (data: T & { id: string }) => Promise<any>
   onSuccess?: () => void
+  beforeOpen?: (formData: T, row?: any) => void | Promise<void>
 }
 
 /**
@@ -32,33 +34,27 @@ interface UseDialogFormOptions<T extends Record<string, any>> {
  * // 编辑
  * open(row)
  */
-export const useDialogForm = <T extends Record<string, any>>(options: UseDialogFormOptions<T>) => {
+export const useDialogForm = <T extends Record<string, any>>(
+  options: UseDialogFormOptions<T>
+) => {
   const visible = ref(false)
   const formData = reactive<T>({ ...options.defaultFormData })
   const confirmLoading = ref(false)
   const currentId = ref('')
 
-  const assignFormData = (source: Record<string, any>) => {
-    const keys = Object.keys(options.defaultFormData) as (keyof T)[]
-    keys.forEach(key => {
-      if (String(key) in source) {
-        ;(formData as Record<string, any>)[String(key)] = source[String(key)]
-      }
-    })
-  }
-
   const open = async (row?: any) => {
-    Object.assign(formData, options.defaultFormData)
+    assignObject(formData, JSON.parse(JSON.stringify(options.defaultFormData)))
     currentId.value = ''
     if (row) {
       currentId.value = row.id
       if (options.fetchDetail) {
         const { data } = await options.fetchDetail(row.id)
-        assignFormData(data)
+        assignObject(formData, data)
       } else {
-        assignFormData(row)
+        assignObject(formData, row)
       }
     }
+    await options.beforeOpen?.(formData as T, row)
     visible.value = true
   }
 
