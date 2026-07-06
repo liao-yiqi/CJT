@@ -82,41 +82,46 @@ const formItems = defineFormItems<ControlPointItemFormData>([
     label: '级别',
     prop: 'grade',
     type: 'select',
-    componentProps: { dictField: 'background_point_grade' }
+    componentProps: { dictField: 'background_point_grade' },
+    rules: [{ required: true, message: '未选择级别', trigger: 'blur' }]
   },
   {
     label: '测评项',
     prop: 'item',
     type: 'input',
     componentProps: { type: 'textarea', rows: 5 },
-    colSpan: 2
+    colSpan: 2,
+    rules: [{ required: true, message: '未填写测评项', trigger: 'blur' }]
   },
   {
     label: '测评对象',
     prop: 'obj',
     type: 'input',
     componentProps: { type: 'textarea', rows: 5 },
-    colSpan: 2
+    colSpan: 2,
+    rules: [{ required: true, message: '未填写测评对象', trigger: 'blur' }]
   },
   {
     label: '单元判定',
     prop: 'judge',
     type: 'input',
     componentProps: { type: 'textarea', rows: 5 },
-    colSpan: 2
+    colSpan: 2,
+    rules: [{ required: true, message: '未填写单元判定', trigger: 'blur' }]
   },
   {
     label: '解读',
     prop: 'interpret',
     type: 'input',
     componentProps: { type: 'textarea', rows: 5 },
-    colSpan: 2
+    colSpan: 2,
+    rules: [{ required: true, message: '未填写解读', trigger: 'blur' }]
   },
   {
     label: '测评方法及步骤',
     prop: 'methods',
     customSlot: 'methods',
-    colSpan: 2
+    colSpan: 2,
   }
 ])
 

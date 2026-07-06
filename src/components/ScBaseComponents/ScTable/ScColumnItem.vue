@@ -40,7 +40,7 @@ const columnMinWidth = computed(() => {
       <template v-else-if="columnItem.showOverflowTooltip">
         <el-tooltip
           :content="String(scope.row[columnItem.prop] ?? '--')"
-          placement="top"
+          placement="left"
           popper-class="sc-table-tooltip"
         >
           <span class="cell-ellipsis">{{ scope.row[columnItem.prop] ?? '--' }}</span>
