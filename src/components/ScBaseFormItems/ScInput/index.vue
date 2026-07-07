@@ -9,7 +9,8 @@ const props = withDefaults(defineProps<ScInputProps>(), {
   placeholder: '请输入',
   disabled: false,
   showWordLimit: false,
-  clearable: true
+  clearable: true,
+  rows: 5
 })
 
 const emit = defineEmits<ScInputEmits>()
@@ -73,6 +74,7 @@ defineExpose({
       :show-word-limit="showWordLimit"
       :prefix-icon="prefixIcon"
       :suffix-icon="suffixIcon"
+      :rows="rows"
       @input="handleInput"
       @change="handleChange"
       @blur="handleBlur"

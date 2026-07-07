@@ -14,6 +14,7 @@ import {
 } from '@element-plus/icons-vue'
 import { useDownloadFilesStore } from '@/store/modules/download-store.ts'
 import { uploadFile, downloadFile } from '@/utils/file'
+import { ScMessage } from '@/utils/ElUtils'
 
 const props = defineProps<ScBaseUploadProps>()
 const emit = defineEmits<ScBaseUploadEmits>()
@@ -31,6 +32,11 @@ const visible = computed({
 const dialogTitle = computed(() => {
   if (props.title) return props.title
   return '文件上传'
+})
+
+const uploadSuccessMsg = computed(() => {
+  if (props.uploadConfig.successMsg) return props.uploadConfig.successMsg
+  return '文件导入成功！'
 })
 
 const accept = computed(() => {
@@ -133,6 +139,7 @@ const handleConfirm = async () => {
     fileList.value.forEach(f => {
       f.status = 'success'
     })
+    ScMessage.success(uploadSuccessMsg.value)
     emit('uploadSuccess')
     visible.value = false
   } catch (e: any) {

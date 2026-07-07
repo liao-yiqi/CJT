@@ -43,6 +43,7 @@ const handleClosed = () => {
       :label-width="config.labelWidth"
       :inline="config.inline"
       :columns="config.columns"
+      :is-group="config.groupModel ?? true"
     >
       <template v-for="(_, name) in $slots" #[name]="slotProps">
         <slot :name="name" v-bind="slotProps ?? {}" />

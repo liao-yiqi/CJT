@@ -16,6 +16,7 @@ export interface ScUploadConfig {
   headers?: Record<string, string>
   accept?: string[]
   multiple?: boolean
+  successMsg?: string
 }
 
 export interface ScTemplateConfig {

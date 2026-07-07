@@ -10,6 +10,7 @@ export interface ScInputProps {
   prefixIcon?: string
   suffixIcon?: string
   autosize?: boolean
+  rows?: number
 }
 
 export type ScInputType = 'text' | 'number' | 'textarea' | 'password'

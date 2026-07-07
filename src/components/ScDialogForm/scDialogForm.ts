@@ -11,6 +11,7 @@ export interface ScDialogFormConfig {
   labelWidth?: number | string
   inline?: boolean
   columns?: number
+  groupModel?: boolean
 }
 
 export interface ScDialogFormProps {

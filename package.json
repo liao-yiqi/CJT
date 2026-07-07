@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.ts,.js",
     "lint:fix": "eslint . --ext .vue,.ts,.js --fix",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "crud:create": "tsx cli.ts create"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.2",
@@ -40,6 +41,7 @@
     "pinia-plugin-persistedstate": "^4.7.1",
     "prettier": "^3.8.3",
     "sass": "^1.99.0",
+    "tsx": "^4.23.0",
     "typescript": "~6.0.2",
     "unplugin-auto-import": "^21.0.0",
     "unplugin-vue-components": "^32.0.0",
