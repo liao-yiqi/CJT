@@ -33,3 +33,9 @@ export const deleteIndustryStandardAPI = (data: { ids: Array<string> }) => {
     data
   })
 }
+
+export const getIndustryStandardOptionsAPI = () => {
+  return request.get<DataResponse<Array<IndustryStandardData>>>({
+    url: '/background/standard/option'
+  })
+}

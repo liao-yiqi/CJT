@@ -171,12 +171,6 @@ onMounted(() => {
   getControlPointOptions()
 })
 
-const {
-  visible: importVisible,
-  open: importOpen,
-  handleSuccess
-} = useUploadDialog(() => scResourcePageRef?.value?.refresh())
-
 const uploadConfig: UploadConfig = {
   uploadUrl: '/background/pointItem/import',
   accept: ['.xls', '.xlsx']
@@ -187,6 +181,13 @@ const templateConfig: TemplateConfig = {
   requestMethod: 'POST',
   showTemplateDownload: true
 }
+
+const { open: importOpen } = useUploadDialog({
+  uploadConfig,
+  templateConfig,
+  title: '控制点检查项导入',
+  onSuccess: () => scResourcePageRef?.value?.refresh()
+})
 </script>
 
 <template>
@@ -213,14 +214,6 @@ const templateConfig: TemplateConfig = {
       @success="scResourcePageRef?.refresh()"
       @confirm="handleConfirm"
     />
-    <ScBaseUpload
-      v-model="importVisible"
-      title="控制点检查项导入"
-      :upload-config="uploadConfig"
-      :template-config="templateConfig"
-      @upload-success="handleSuccess()"
-    >
-    </ScBaseUpload>
   </div>
 </template>
 

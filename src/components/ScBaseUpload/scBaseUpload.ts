@@ -4,6 +4,7 @@ export interface ScBaseUploadProps {
   templateConfig?: ScTemplateConfig
   title?: string
   uploadFn?: (files: Array<File>) => Promise<void>
+  uploadExtraParams?:Record<string, any>
 }
 
 export interface ScBaseUploadEmits {

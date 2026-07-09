@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .vue,.ts,.js",
     "lint:fix": "eslint . --ext .vue,.ts,.js --fix",
     "format": "prettier . --write",
-    "crud:create": "tsx cli.ts create"
+    "page:create": "tsx script/page-gen/cli.ts create"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.2",

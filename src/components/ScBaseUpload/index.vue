@@ -132,7 +132,8 @@ const handleConfirm = async () => {
     : () =>
         uploadFile(
           props.uploadConfig.uploadUrl,
-          fileList.value.map(f => f.file)
+          fileList.value.map(f => f.file),
+          props.uploadExtraParams
         )
   try {
     await doUpload()

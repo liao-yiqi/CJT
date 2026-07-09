@@ -46,6 +46,7 @@ export interface ScFormSelectProps {
   noDataText?: string
   noMatchText?: string
   labelMaxWidth?: number | string
+  onChange?: (value: any) => void
 }
 
 export interface ScFormDateProps {

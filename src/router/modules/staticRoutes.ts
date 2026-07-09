@@ -47,5 +47,23 @@ export const staticRoutes: Array<ScRouteRecordRaw> = [
           import('@/views/adminManagement/controlPoint/controlPointItem.vue')
       }
     ]
+  },
+  {
+    path: '/codeVulnerabilityLibrary',
+    hidden: true,
+    component: Layout,
+    permissions: ['background:code:list'],
+    meta: {
+      title: '源代码-标准漏洞库',
+      activeMenu: '/codeVulnerabilityLibrary'
+    },
+    children: [
+      {
+        path: 'codeVulnerabilityLibraryDetail/:id',
+        name: 'CodeVulnerabilityLibraryDetail',
+        component: () =>
+          import('@/views/adminManagement/codeVulnerabilityStandard/index.vue')
+      }
+    ]
   }
 ]
