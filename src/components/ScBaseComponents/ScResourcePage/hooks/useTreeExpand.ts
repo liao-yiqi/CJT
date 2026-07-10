@@ -61,7 +61,7 @@ export const useTreeExpand = (
     collectRows(getTableData())
     allRowsToCollapse.forEach(r => {
       if (!tableRef?.value) return
-      tableRef?.value.toggleRowExpansion(r, true)
+      tableRef?.value.toggleRowExpansion(r, false)
     })
   }
 
@@ -73,5 +73,5 @@ export const useTreeExpand = (
       collapseAllRows()
     }
   }
-  return { isAllExpanded, toggleExpandAll }
+  return { isAllExpanded, toggleExpandAll, expandAllRows }
 }
