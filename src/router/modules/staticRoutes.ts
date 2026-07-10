@@ -65,5 +65,23 @@ export const staticRoutes: Array<ScRouteRecordRaw> = [
           import('@/views/adminManagement/codeVulnerabilityStandard/index.vue')
       }
     ]
+  },
+  {
+    path: '/toolLibrary',
+    hidden: true,
+    component: Layout,
+    permissions: ['background:code:list'],
+    meta: {
+      title: '工具库版本',
+      activeMenu: '/toolLibrary'
+    },
+    children: [
+      {
+        path: 'toolVersion/:id',
+        name: 'ToolVersion',
+        component: () =>
+          import('@/views/adminManagement/toolVersion/index.vue')
+      }
+    ]
   }
 ]
