@@ -17,11 +17,7 @@ crud-gen/
 
 ## 用法一：一次性生成三个文件（走 cli.ts）
 
-> **注意**：下面命令里的换行续行符 `\` 只在 **Bash / macOS / Linux 终端**里有效。
-> 如果你用的是 **Windows PowerShell**，续行符是反引号 `` ` ``；**cmd.exe** 用 `^`；
-> 最省心的做法是直接写成一行，不用续行符，三种终端都能跑。
-
-一行写法（推荐，跨平台通用）：
+终端用法：
 
 ```bash
 pnpm crud:create GenerateTemplate 生成模板 --domain=generateManagement --delete
