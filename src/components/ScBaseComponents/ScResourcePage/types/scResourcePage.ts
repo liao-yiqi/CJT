@@ -9,9 +9,14 @@ export interface ScResourcePageConfig<TRow = any> {
   searchConfig: SearchConfig
   operateConfig?: OperateConfig
   tableConfig: TableConfig<TRow>
-  fetchData: (params: any) => Promise<ListResponse<TRow>>
+  fetchData: (params: any) => Promise<TableData>
   pageExtraParams?: Record<string, any>
   treeConfig?: TreeConfig
+}
+
+export interface TableData<TRow = any> {
+  rows: Array<TRow>
+  total?: number
 }
 
 export interface TreeConfig {
@@ -19,6 +24,7 @@ export interface TreeConfig {
   hasChildren?: string
   rowKey?: string
   showExpandButton?: boolean
+  defaultExpandAll?: boolean
 }
 
 export interface ExportConfig {
