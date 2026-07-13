@@ -73,7 +73,7 @@ const { tableData, tableTotal, loading, fetchTableData, handlePageChange } =
   )
 
 // 树形操作
-const { isAllExpanded, toggleExpandAll } = useTreeExpand(
+const { isAllExpanded, toggleExpandAll, expandAllRows } = useTreeExpand(
   () => props.pageConfig.treeConfig,
   () => tableData.value,
   tableRef
@@ -100,9 +100,14 @@ const { allActionButtons, isButtonDisabled, resolveButtonName } =
     () => props.pageConfig.tableConfig.defaultButtonsConfig
   )
 
-onMounted(() => {
+onMounted(async () => {
   initSelectedColumns()
-  fetchTableData()
+  await fetchTableData()
+  // 首次加载后，若配置了默认展开全部
+  if (props.pageConfig.treeConfig?.defaultExpandAll) {
+    isAllExpanded.value = true
+    await expandAllRows()
+  }
 })
 
 // 多选数据
