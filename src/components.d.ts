@@ -48,6 +48,7 @@ declare module 'vue' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    ElTreeSelect: typeof import('element-plus/es')['ElTreeSelect']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     Index2: typeof import('./components/ScBaseComponents/ScTable/index2.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
@@ -75,6 +76,7 @@ declare module 'vue' {
     ScSelect: typeof import('./components/ScBaseFormItems/ScSelect/index.vue')['default']
     ScSwitch: typeof import('./components/ScBaseFormItems/ScSwitch/index.vue')['default']
     ScTable: typeof import('./components/ScBaseComponents/ScTable/index.vue')['default']
+    ScTreeSelect: typeof import('./components/ScBaseFormItems/ScTreeSelect/index.vue')['default']
     SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
   }
   export interface GlobalDirectives {
@@ -120,6 +122,7 @@ declare global {
   const ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
   const ElTag: typeof import('element-plus/es')['ElTag']
   const ElTooltip: typeof import('element-plus/es')['ElTooltip']
+  const ElTreeSelect: typeof import('element-plus/es')['ElTreeSelect']
   const ElUpload: typeof import('element-plus/es')['ElUpload']
   const Index2: typeof import('./components/ScBaseComponents/ScTable/index2.vue')['default']
   const RouterLink: typeof import('vue-router')['RouterLink']
@@ -147,5 +150,6 @@ declare global {
   const ScSelect: typeof import('./components/ScBaseFormItems/ScSelect/index.vue')['default']
   const ScSwitch: typeof import('./components/ScBaseFormItems/ScSwitch/index.vue')['default']
   const ScTable: typeof import('./components/ScBaseComponents/ScTable/index.vue')['default']
+  const ScTreeSelect: typeof import('./components/ScBaseFormItems/ScTreeSelect/index.vue')['default']
   const SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
 }

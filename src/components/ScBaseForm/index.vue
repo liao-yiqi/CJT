@@ -8,7 +8,8 @@ import {
   ScCheckbox,
   ScSwitch,
   ScDatePicker,
-  ScDateRangePicker
+  ScDateRangePicker,
+  ScTreeSelect
 } from '../ScBaseFormItems'
 import { ArrowUp } from '@element-plus/icons-vue'
 
@@ -25,7 +26,9 @@ const props = withDefaults(defineProps<ScBaseFormProps>(), {
 const formRules = computed<FormRules>(() => {
   return props.formItems.reduce((acc, item) => {
     if (item.rules) {
-      acc[String(item.prop)] = Array.isArray(item.rules) ? item.rules : [item.rules]
+      acc[String(item.prop)] = Array.isArray(item.rules)
+        ? item.rules
+        : [item.rules]
     }
     return acc
   }, {} as FormRules)
@@ -39,7 +42,8 @@ const componentMap = {
   dateRange: ScDateRangePicker,
   radio: ScRadio,
   checkbox: ScCheckbox,
-  switch: ScSwitch
+  switch: ScSwitch,
+  treeSelect: ScTreeSelect
 } as const
 
 const scBaseFormRef = useTemplateRef<FormInstance>('scBaseFormRef')
@@ -111,10 +115,17 @@ defineExpose<ScBaseFormInstance>({
   >
     <!-- 分组模式 -->
     <template v-if="isGroup && groupedItems">
-      <div v-for="[groupName, items] in groupedItems" :key="groupName" class="form-group">
+      <div
+        v-for="[groupName, items] in groupedItems"
+        :key="groupName"
+        class="form-group"
+      >
         <div class="form-group__header" @click="toggleGroup(groupName)">
           <span class="form-group__title">{{ groupName }}</span>
-          <el-icon class="form-group__icon" :class="{ 'is-collapsed': collapsedMap[groupName] }">
+          <el-icon
+            class="form-group__icon"
+            :class="{ 'is-collapsed': collapsedMap[groupName] }"
+          >
             <ArrowUp />
           </el-icon>
         </div>
@@ -129,7 +140,9 @@ defineExpose<ScBaseFormInstance>({
             :key="item.prop"
             :label="item.label"
             :prop="item.prop"
-            :style="item.colSpan ? { 'grid-column': `span ${item.colSpan}` } : {}"
+            :style="
+              item.colSpan ? { 'grid-column': `span ${item.colSpan}` } : {}
+            "
           >
             <slot
               v-if="item.customSlot"

@@ -6,7 +6,8 @@ import type {
   ScFormInputProps,
   ScFormRadioProps,
   ScFormSelectProps,
-  ScFormSwitchProps
+  ScFormSwitchProps,
+  ScFormTreeSelectProps
 } from './componentProps.ts'
 
 interface ScBaseFormItemBase {
@@ -54,6 +55,11 @@ export interface ScBaseFormSwitchItem extends ScBaseFormItemBase {
   componentProps?: ScFormSwitchProps
 }
 
+export interface ScBaseFormTreeSelectItem extends ScBaseFormItemBase {
+  type: 'treeSelect'
+  componentProps?: ScFormTreeSelectProps
+}
+
 export interface ScBaseFormCustomItem extends ScBaseFormItemBase {
   type?: never
   customSlot: string
@@ -67,4 +73,5 @@ export type ScBaseFormItem =
   | ScBaseFormRadioItem
   | ScBaseFormCheckboxItem
   | ScBaseFormSwitchItem
+  | ScBaseFormTreeSelectItem
   | ScBaseFormCustomItem

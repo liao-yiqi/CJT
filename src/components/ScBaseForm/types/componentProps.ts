@@ -14,6 +14,10 @@ import type {
   ScCheckboxFieldName,
   ScCheckboxOption
 } from '@/components/ScBaseFormItems/ScCheckbox'
+import type {
+  ScTreeSelectFieldName,
+  ScTreeSelectOption
+} from '@/components/ScBaseFormItems/ScTreeSelect'
 
 export interface ScFormInputProps {
   type?: ScInputType
@@ -96,4 +100,26 @@ export interface ScFormSwitchProps {
   activeValue?: string | number | boolean
   inactiveValue?: string | number | boolean
   disabled?: boolean
+}
+
+export interface ScFormTreeSelectProps {
+  options?: Array<ScTreeSelectOption> | Array<Record<string, any>>
+  multiple?: boolean
+  checkStrictly?: boolean
+  nodeKey?: string
+  fieldNames?: ScTreeSelectFieldName
+  disabled?: boolean
+  size?: 'large' | 'small' | 'default'
+  placeholder?: string
+  clearable?: boolean
+  filterable?: boolean
+  collapseTags?: boolean
+  collapseTagsTooltip?: boolean
+  multipleLimit?: number
+  defaultExpandAll?: boolean
+  renderAfterExpand?: boolean
+  checkOnClickNode?: boolean
+  accordion?: boolean
+  noDataText?: string
+  labelMaxWidth?: number | string
 }
