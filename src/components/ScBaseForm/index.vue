@@ -9,7 +9,8 @@ import {
   ScSwitch,
   ScDatePicker,
   ScDateRangePicker,
-  ScTreeSelect
+  ScTreeSelect,
+  ScTree
 } from '../ScBaseFormItems'
 import { ArrowUp } from '@element-plus/icons-vue'
 
@@ -43,7 +44,8 @@ const componentMap = {
   radio: ScRadio,
   checkbox: ScCheckbox,
   switch: ScSwitch,
-  treeSelect: ScTreeSelect
+  treeSelect: ScTreeSelect,
+  tree: ScTree
 } as const
 
 const scBaseFormRef = useTemplateRef<FormInstance>('scBaseFormRef')
@@ -98,10 +100,24 @@ const handleValidate = async () => {
   }
 }
 
+// 收集每个表单项对应的组件实例
+const itemRefs = reactive<Record<string, any>>({})
+
+const setItemRef = (prop: string, el: any) => {
+  if (el) {
+    itemRefs[prop] = el
+  } else {
+    delete itemRefs[prop]
+  }
+}
+
+const getItemRef = <T = any,>(prop: string): T => itemRefs[prop]
+
 defineExpose<ScBaseFormInstance>({
   validate: handleValidate,
   resetFields: () => scBaseFormRef.value!.resetFields(),
-  clearValidate: props => scBaseFormRef.value!.clearValidate(props)
+  clearValidate: props => scBaseFormRef.value!.clearValidate(props),
+  getItemRef
 })
 </script>
 
@@ -144,19 +160,27 @@ defineExpose<ScBaseFormInstance>({
               item.colSpan ? { 'grid-column': `span ${item.colSpan}` } : {}
             "
           >
-            <slot
-              v-if="item.customSlot"
-              :name="`custom-${item.customSlot}`"
-              :item="item"
-              :data="modelValue"
-            />
-            <component
-              v-else-if="item.type && componentMap[item.type]"
-              :is="componentMap[item.type]"
-              v-bind="item.componentProps"
-              :modelValue="modelValue[item.prop]"
-              @update:modelValue="modelValue[item.prop] = $event"
-            />
+            <div class="form-item-content">
+              <slot
+                :name="`before-${item.prop}`"
+                :item="item"
+                :data="modelValue"
+              />
+              <slot
+                v-if="item.customSlot"
+                :name="`custom-${item.customSlot}`"
+                :item="item"
+                :data="modelValue"
+              />
+              <component
+                v-bind="item.componentProps"
+                v-else-if="item.type && componentMap[item.type]"
+                :is="componentMap[item.type]"
+                :modelValue="modelValue[item.prop]"
+                :ref="(el: any) => setItemRef(item.prop, el)"
+                @update:modelValue="modelValue[item.prop] = $event"
+              />
+            </div>
           </el-form-item>
         </div>
       </div>
@@ -173,19 +197,28 @@ defineExpose<ScBaseFormInstance>({
           :prop="item.prop"
           :style="item.colSpan ? { 'grid-column': `span ${item.colSpan}` } : {}"
         >
-          <slot
-            v-if="item.customSlot"
-            :name="`custom-${item.customSlot}`"
-            :item="item"
-            :data="modelValue"
-          />
-          <component
-            v-else-if="item.type && componentMap[item.type]"
-            :is="componentMap[item.type]"
-            v-bind="item.componentProps"
-            :modelValue="modelValue[item.prop]"
-            @update:modelValue="modelValue[item.prop] = $event"
-          />
+          <div class="form-item-content">
+            <slot
+              :name="`before-${item.prop}`"
+              :item="item"
+              :data="modelValue"
+            />
+            <slot
+              v-if="item.customSlot"
+              :name="`custom-${item.customSlot}`"
+              :item="item"
+              :data="modelValue"
+              :ref="(el: any) => setItemRef(item.prop, el)"
+            />
+            <component
+              v-bind="item.componentProps"
+              v-else-if="item.type && componentMap[item.type]"
+              :is="componentMap[item.type]"
+              :ref="(el: any) => setItemRef(item.prop, el)"
+              :modelValue="modelValue[item.prop]"
+              @update:modelValue="modelValue[item.prop] = $event"
+            />
+          </div>
         </el-form-item>
       </div>
     </template>
@@ -233,5 +266,11 @@ defineExpose<ScBaseFormInstance>({
   grid-template-columns: repeat(var(--form-columns, 2), 1fr);
   column-gap: 16px;
   align-items: start;
+}
+
+.form-item-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 </style>

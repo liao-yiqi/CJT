@@ -39,6 +39,7 @@ const handleCancel = () => {
     :width="dialogWidth"
     :draggable="draggable"
     :fullscreen="fullscreen"
+    append-to-body
     @close="handleCancel"
     @closed="emit('closed')"
     @open="emit('open')"

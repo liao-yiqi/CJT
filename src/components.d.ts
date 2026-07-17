@@ -48,6 +48,7 @@ declare module 'vue' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    ElTree: typeof import('element-plus/es')['ElTree']
     ElTreeSelect: typeof import('element-plus/es')['ElTreeSelect']
     ElUpload: typeof import('element-plus/es')['ElUpload']
     Index2: typeof import('./components/ScBaseComponents/ScTable/index2.vue')['default']
@@ -76,6 +77,7 @@ declare module 'vue' {
     ScSelect: typeof import('./components/ScBaseFormItems/ScSelect/index.vue')['default']
     ScSwitch: typeof import('./components/ScBaseFormItems/ScSwitch/index.vue')['default']
     ScTable: typeof import('./components/ScBaseComponents/ScTable/index.vue')['default']
+    ScTree: typeof import('./components/ScBaseFormItems/ScTree/index.vue')['default']
     ScTreeSelect: typeof import('./components/ScBaseFormItems/ScTreeSelect/index.vue')['default']
     SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
   }
@@ -122,6 +124,7 @@ declare global {
   const ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
   const ElTag: typeof import('element-plus/es')['ElTag']
   const ElTooltip: typeof import('element-plus/es')['ElTooltip']
+  const ElTree: typeof import('element-plus/es')['ElTree']
   const ElTreeSelect: typeof import('element-plus/es')['ElTreeSelect']
   const ElUpload: typeof import('element-plus/es')['ElUpload']
   const Index2: typeof import('./components/ScBaseComponents/ScTable/index2.vue')['default']
@@ -150,6 +153,7 @@ declare global {
   const ScSelect: typeof import('./components/ScBaseFormItems/ScSelect/index.vue')['default']
   const ScSwitch: typeof import('./components/ScBaseFormItems/ScSwitch/index.vue')['default']
   const ScTable: typeof import('./components/ScBaseComponents/ScTable/index.vue')['default']
+  const ScTree: typeof import('./components/ScBaseFormItems/ScTree/index.vue')['default']
   const ScTreeSelect: typeof import('./components/ScBaseFormItems/ScTreeSelect/index.vue')['default']
   const SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
 }

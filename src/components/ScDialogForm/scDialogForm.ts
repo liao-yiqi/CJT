@@ -1,4 +1,5 @@
 import type { ScBaseFormItem } from '@/components/ScBaseForm/types/formItem.ts'
+import type { ScBaseFormInstance } from '@/components/ScBaseForm'
 
 export interface ScDialogFormConfig {
   title?: string
@@ -25,3 +26,5 @@ export interface ScDialogFormEmits {
   (e: 'update:modelValue', val: boolean): void
   (e: 'confirm', data: Record<string, any>): void
 }
+
+export interface ScDialogFormInstance extends ScBaseFormInstance {}

@@ -13,4 +13,5 @@ export interface ScBaseFormInstance {
   validate: () => Promise<boolean>
   resetFields: () => void
   clearValidate: (props?: string | string[]) => void
+  getItemRef: <T = any>(prop: string) => T
 }

@@ -6,6 +6,7 @@ import ScRadio from './ScRadio'
 import ScCheckbox from './ScCheckbox'
 import ScSwitch from './ScSwitch'
 import ScTreeSelect from './ScTreeSelect'
+import ScTree from './ScTree'
 
 export {
   ScInput,
@@ -15,5 +16,8 @@ export {
   ScRadio,
   ScCheckbox,
   ScSwitch,
-  ScTreeSelect
+  ScTreeSelect,
+  ScTree
 }
+
+export type { ScTreeOption, ScTreeFieldName } from './types/tree.ts'

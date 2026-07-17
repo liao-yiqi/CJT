@@ -1,3 +1,5 @@
+import type { ScTreeOption, ScTreeFieldName } from '../index.ts'
+
 export interface ScTreeSelectProps {
   modelValue: ScTreeSelectModelValue
   options?: Array<ScTreeSelectOption> | Array<Record<string, any>>
@@ -23,18 +25,9 @@ export interface ScTreeSelectProps {
 
 export type ScTreeSelectModelValue = string | number | Array<string | number>
 
-export interface ScTreeSelectOption {
-  label: string
-  value: string | number
-  disabled?: boolean
-  children?: Array<ScTreeSelectOption>
-}
+export type ScTreeSelectOption = ScTreeOption
 
-export interface ScTreeSelectFieldName {
-  label: string
-  children: string
-  disabled?: string
-}
+export type ScTreeSelectFieldName = ScTreeFieldName
 
 export interface ScTreeSelectEmits {
   (e: 'update:modelValue', value: ScTreeSelectModelValue): void

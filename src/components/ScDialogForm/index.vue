@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import type { ScDialogFormProps, ScDialogFormEmits } from './scDialogForm.ts'
+import type {
+  ScDialogFormProps,
+  ScDialogFormEmits,
+  ScDialogFormInstance
+} from './scDialogForm.ts'
 import type { ScBaseFormInstance } from '@/components/ScBaseForm'
 
 const props = defineProps<ScDialogFormProps>()
@@ -21,6 +25,14 @@ const handleConfirm = async () => {
 const handleClosed = () => {
   formRef.value?.resetFields()
 }
+
+defineExpose<ScDialogFormInstance>({
+  validate: () => formRef.value!.validate(),
+  resetFields: () => formRef.value!.resetFields(),
+  clearValidate: (props?: string | string[]) =>
+    formRef.value!.clearValidate(props),
+  getItemRef: <T = any,>(prop: string) => formRef.value!.getItemRef<T>(prop)
+})
 </script>
 
 <template>

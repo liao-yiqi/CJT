@@ -18,6 +18,10 @@ import type {
   ScTreeSelectFieldName,
   ScTreeSelectOption
 } from '@/components/ScBaseFormItems/ScTreeSelect'
+import type {
+  ScTreeFieldName,
+  ScTreeOption
+} from '@/components/ScBaseFormItems/ScTree'
 
 export interface ScFormInputProps {
   type?: ScInputType
@@ -122,4 +126,15 @@ export interface ScFormTreeSelectProps {
   accordion?: boolean
   noDataText?: string
   labelMaxWidth?: number | string
+}
+
+export interface ScFormTreeProps {
+  options?: Array<ScTreeOption> | Array<Record<string, any>>
+  fieldNames?: ScTreeFieldName
+  nodeKey?: string
+  checkStrictly?: boolean
+  defaultExpandAll?: boolean
+  disabled?: boolean
+  filterable?: boolean
+  emptyText?: string
 }

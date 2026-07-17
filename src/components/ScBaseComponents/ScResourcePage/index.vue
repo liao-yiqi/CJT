@@ -243,6 +243,7 @@ defineExpose<ScResourcePageInstance>({
         :show-action="showActionColumn"
         :show-pagination="props.pageConfig.tableConfig.showPagination"
         :show-selection="props.pageConfig.tableConfig.showSelection"
+        :show-index="props.pageConfig.tableConfig.showIndex"
         @selection-change="handleSelectionChange"
         @page-change="handlePageChange"
       >
