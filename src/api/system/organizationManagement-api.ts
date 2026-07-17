@@ -2,7 +2,8 @@ import request from '@/utils/request'
 import type {
   OrganizationManagementData,
   OrganizationManagementFormData,
-  OrganizationManagementSearchParams
+  OrganizationManagementSearchParams,
+  TreeDeptData
 } from '@/types/system/organizationManagement'
 
 const organizationManagementBaseUrl = '/system/dept'
@@ -31,7 +32,14 @@ export const updateOrganizationManagementAPI = (
 ) =>
   request.put<BaseResponse>({ url: `${organizationManagementBaseUrl}`, data })
 
-export const deleteOrganizationManagementAPI = (id: string) =>
-  request.delete<BaseResponse>({
+export const deleteOrganizationManagementAPI = (id: string) => {
+  return request.delete<BaseResponse>({
     url: `${organizationManagementBaseUrl}/${id}`
   })
+}
+
+export const getDeptTreeDataByRoleId = (roleId: number) => {
+  return request.get<TreeDeptData>({
+    url: `/system/dept/roleDeptTreeselect/${roleId}`
+  })
+}

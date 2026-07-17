@@ -20,12 +20,18 @@ export const assignObject = <T extends Record<string, any>>(
   const keys = Object.keys(target) as (keyof T)[]
   keys.forEach(key => {
     const k = String(key)
-    // 有映射关系就取映射的源字段，否则取同名字段
     const sourceKey = keyMap?.[key] ?? k
     if (sourceKey in source) {
-      ;(target as Record<string, any>)[k] = Array.isArray(source[sourceKey])
-        ? JSON.parse(JSON.stringify(source[sourceKey]))
-        : source[sourceKey]
+      const value = source[sourceKey]
+      const targetValue = (target as Record<string, any>)[k]
+      if (Array.isArray(value)) {
+        ;(target as Record<string, any>)[k] = JSON.parse(JSON.stringify(value))
+      } else if (value == null && Array.isArray(targetValue)) {
+        // 字段本应是数组，后端返回 null/undefined 时保留空数组
+        ;(target as Record<string, any>)[k] = []
+      } else {
+        ;(target as Record<string, any>)[k] = value
+      }
     }
   })
 }

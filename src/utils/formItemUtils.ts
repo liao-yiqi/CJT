@@ -16,6 +16,7 @@ import type {
  * if (standardItem) {
  *   standardItem.componentProps.options = await getStandardOptions()
  * }
+ * @deprecated 该函数已不再使用，由findFormItem代替
  */
 export const findFormSelectItem = <T extends Record<string, any>>(
   items: Array<ScBaseFormItem>,

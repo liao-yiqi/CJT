@@ -22,3 +22,15 @@ export type OrganizationManagementFormData = {
   email: string
   status: string
 }
+
+export type TreeDeptData = {
+  depts: Array<{
+    id: string
+    label: string
+    children: Array<{
+      id: string
+      label: string
+    }>
+  }>
+  checkedKeys: Array<number>
+} & BaseResponse

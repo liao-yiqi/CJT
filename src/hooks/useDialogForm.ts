@@ -1,35 +1,29 @@
 import { ScMessage } from '@/utils/ElUtils'
 import { assignObject } from '@/utils/object.ts'
 
-interface UseDialogFormOptions<
+export const useDialogForm = <
   T extends Record<string, any>,
-  K extends string = 'id'
-> {
+  K extends string = 'id',
+  IdType extends string | number = string
+>(options: {
   defaultFormData: T
   title: string
   idKey?: K
-  fetchDetail?: (id: string) => Promise<any>
-  onCreate: (data: T) => Promise<any>
-  onUpdate: (data: T & Record<K, string>) => Promise<any>
+  fetchDetail?: (id: IdType) => Promise<any>
+  onCreate?: (data: T) => Promise<any>
+  onUpdate: (data: T & Record<K, IdType>) => Promise<any>
   onSuccess?: () => void
   beforeOpen?: (formData: T, row?: any) => void | Promise<void>
-}
-
-export const useDialogForm = <
-  T extends Record<string, any>,
-  K extends string = 'id'
->(
-  options: UseDialogFormOptions<T, K>
-) => {
+}) => {
   const idKey = (options.idKey ?? 'id') as K
   const visible = ref(false)
   const formData = reactive<T>({ ...options.defaultFormData })
   const confirmLoading = ref(false)
-  const currentId = ref('')
+  const currentId = ref<IdType>()
 
   const open = async (row?: any, presetData?: Partial<T>) => {
     assignObject(formData, JSON.parse(JSON.stringify(options.defaultFormData)))
-    currentId.value = ''
+    currentId.value = undefined
     if (row) {
       currentId.value = row[idKey]
       if (options.fetchDetail) {
@@ -48,10 +42,17 @@ export const useDialogForm = <
     confirmLoading.value = true
     try {
       const params = data as T
-      currentId.value
-        ? await options.onUpdate({ ...params, [idKey]: currentId.value } as T &
-            Record<K, string>)
-        : await options.onCreate(params)
+      if (currentId.value !== undefined) {
+        await options.onUpdate({ ...params, [idKey]: currentId.value } as T &
+          Record<K, string>)
+      } else {
+        if (!options.onCreate) {
+          throw new Error(
+            '[useDialogForm] 当前是新增场景，但未提供 onCreate函数'
+          )
+        }
+        await options.onCreate(params)
+      }
       visible.value = false
       ScMessage.success(`${currentId.value ? '修改' : '新增'}成功`)
       options.onSuccess?.()
@@ -61,7 +62,9 @@ export const useDialogForm = <
   }
 
   const dialogTitle = computed(() =>
-    currentId.value ? `编辑${options.title}` : `新增${options.title}`
+    currentId.value !== undefined
+      ? `编辑${options.title}`
+      : `新增${options.title}`
   )
 
   return { visible, formData, confirmLoading, dialogTitle, open, handleConfirm }
