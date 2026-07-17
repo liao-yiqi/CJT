@@ -24,8 +24,17 @@ export const getMenuTreeData = () => {
 /**
  * @description 通过角色id获取下拉树结构数据
  */
-export const getMenuTreeMenuDataByRoleId = (roleId: number) => {
+export const getMenuTreeDataByRoleId = (roleId: number) => {
   return request.get<TreeMenuDataByRoleId>({
     url: `/system/menu/roleMenuTreeselect/${roleId}`
+  })
+}
+
+/**
+ * @description 根据角色id查询菜单下拉树结构
+ */
+export const getMenuTreeDataByProjectRoleId = (roleId: number) => {
+  return request.get<TreeMenuDataByRoleId>({
+    url: `/ras/role/subjectRoleMenuTreeSelect/${roleId}`
   })
 }

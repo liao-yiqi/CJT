@@ -17,7 +17,7 @@ import { useDialogForm } from '@/hooks/useDialogForm.ts'
 import { useDeleteAction } from '@/hooks/useDeleteAction.ts'
 import {
   getMenuTreeData,
-  getMenuTreeMenuDataByRoleId
+  getMenuTreeDataByRoleId
 } from '@/api/system/menu-api.ts'
 import { findFormItem } from '@/utils/formItemUtils.ts'
 import type { ScTreeOption } from '@/components/ScBaseFormItems'
@@ -209,7 +209,7 @@ const getTreeMenuData = async () => {
 }
 
 const getTreeMenuDataByRoleId = async (roleId: number) => {
-  const { menus, checkedKeys } = await getMenuTreeMenuDataByRoleId(roleId)
+  const { menus, checkedKeys } = await getMenuTreeDataByRoleId(roleId)
   setMenuPermissionData(menus)
   formData.menuIds = checkedKeys
 }
