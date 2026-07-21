@@ -1,4 +1,5 @@
 import type { SystemRoleData } from '@/types/system/role/systemRole'
+import type { PostData } from '@/types/system/post'
 
 export type UserSearchParams = {
   userName: string
@@ -47,11 +48,5 @@ export type UserDeptTreeSelectData = {
 
 export type UserDetailData = {
   roles: Array<SystemRoleData>
-  posts: Array<{
-    postId: number
-    postCode: string
-    postName: string
-    postSort: string
-    status: string
-  }>
+  posts: Array<Omit<PostData, keyof CommonTableData>>
 } & BaseResponse
