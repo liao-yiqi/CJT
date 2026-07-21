@@ -10,7 +10,8 @@ export type {
   ScResourcePageProps,
   TreeConfig,
   ScResourcePageConfig,
-  ScResourcePageInstance
+  ScResourcePageInstance,
+  ExportConfig as ScExportConfig
 } from './ScResourcePage'
 
 export { ScButton, ScTable, ScSearchbar, ScResourcePage }

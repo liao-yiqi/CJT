@@ -12,6 +12,7 @@ export type SystemRoleData = {
   roleSort: string
   status: string
   createTime: string
+  dataScope: string
 } & CommonTableData
 
 export type SystemRoleFormData = {

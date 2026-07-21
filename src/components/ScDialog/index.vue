@@ -39,6 +39,7 @@ const handleCancel = () => {
     :width="dialogWidth"
     :draggable="draggable"
     :fullscreen="fullscreen"
+    :style="{ '--sc-body-min-h': autoHeight ? 'auto' : undefined }"
     append-to-body
     @close="handleCancel"
     @closed="emit('closed')"
@@ -56,13 +57,18 @@ const handleCancel = () => {
     <template #footer>
       <slot name="footer">
         <div class="dialog-footer">
-          <ScButton :icon="CircleCloseFilled" @click="handleCancel" type="warning">
+          <ScButton
+            :icon="CircleCloseFilled"
+            @click="handleCancel"
+            type="warning"
+          >
             {{ cancelText }}
           </ScButton>
           <el-button
             :icon="CircleCheckFilled"
             type="danger"
             :loading="confirmLoading"
+            :disabled="props.confirmDisabled"
             @click="handleConfirm"
           >
             {{ confirmText }}
@@ -126,7 +132,7 @@ const handleCancel = () => {
 
   .el-dialog__body {
     padding: 5px;
-    min-height: 300px;
+    min-height: var(--sc-body-min-h, 300px);
     color: #333;
   }
   .el-dialog__footer {

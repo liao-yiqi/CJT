@@ -15,6 +15,10 @@ export interface ScDialogProps {
   draggable?: boolean
   // 全屏弹窗
   fullscreen?: boolean
+  //  弹窗自动高度
+  autoHeight?: boolean
+  // 确认按钮禁用状态
+  confirmDisabled?: boolean
 }
 
 export interface ScDialogEmits {

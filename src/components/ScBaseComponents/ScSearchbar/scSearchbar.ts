@@ -1,5 +1,9 @@
 import type { ScDatePickerProps } from '@/components/ScBaseFormItems/ScDatePicker'
 import type { ScDateRangeSelectorProps } from '@/components/ScSearchDateRangeSelector/ScSearchDateRangeSelector.ts'
+import type {
+  ScTreeSelectFieldName,
+  ScTreeSelectProps
+} from '@/components/ScBaseFormItems/ScTreeSelect'
 
 type ScSearchbarBaseItem<T> = {
   prop: keyof T
@@ -43,11 +47,23 @@ export type ScSearchbarDateRangeItem<T> = ScSearchbarBaseItem<T> & {
   rangeSeparator?: string
 }
 
+export type ScSearchbarTreeSelectItem<T> = ScSearchbarBaseItem<T> & {
+  type: 'treeSelect'
+  options?: ScTreeSelectProps['options']
+  multiple?: boolean
+  checkStrictly?: boolean
+  nodeKey?: string
+  fieldNames?: ScTreeSelectFieldName
+  filterable?: boolean
+  defaultExpandAll?: boolean
+}
+
 export type ScSearchbarItem<T = Record<string, any>> =
   | ScSearchbarInputItem<T>
   | ScSearchbarSelectItem<T>
   | ScSearchbarDateItem<T>
   | ScSearchbarDateRangeItem<T>
+  | ScSearchbarTreeSelectItem<T>
 
 export type ScSearchbarProps = {
   searchbarItems: Array<ScSearchbarItem>

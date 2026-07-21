@@ -1,9 +1,18 @@
 <script setup lang="ts">
-import type { ScSearchbarEmits, ScSearchbarItem, ScSearchbarProps } from './scSearchbar.ts'
+import type {
+  ScSearchbarEmits,
+  ScSearchbarItem,
+  ScSearchbarProps
+} from './scSearchbar.ts'
 import type { Component } from 'vue'
 import { useDebounceFn } from '@vueuse/core'
 import { ArrowDown, Refresh, Search } from '@element-plus/icons-vue'
-import { ScInput, ScSelect, ScDatePicker } from '../../ScBaseFormItems'
+import {
+  ScInput,
+  ScSelect,
+  ScDatePicker,
+  ScTreeSelect
+} from '../../ScBaseFormItems'
 import ScDateRangeSelector from '../../ScSearchDateRangeSelector'
 
 defineOptions({
@@ -30,7 +39,8 @@ const componentMap: Record<string, Component> = {
   input: ScInput,
   select: ScSelect,
   date: ScDatePicker,
-  dateRange: ScDateRangeSelector
+  dateRange: ScDateRangeSelector,
+  treeSelect: ScTreeSelect
 }
 
 const getComponent = (type: string): Component | undefined => {
@@ -82,6 +92,17 @@ const getComponentProps = (item: ScSearchbarItem): Record<string, any> => {
       base.rangeSeparator = item.rangeSeparator
       break
     }
+    case 'treeSelect': {
+      base.placeholder = item.placeholder ?? `请选择${item.label ?? ''}`
+      base.options = item.options
+      base.multiple = item.multiple
+      base.checkStrictly = item.checkStrictly
+      base.nodeKey = item.nodeKey
+      base.fieldNames = item.fieldNames
+      base.filterable = item.filterable
+      base.defaultExpandAll = item.defaultExpandAll
+      break
+    }
   }
   return { ...base, ...(item.componentProps ?? {}) }
 }
@@ -103,8 +124,15 @@ const handleSearch = useDebounceFn(() => {
 
 const handleReset = () => {
   props.searchbarItems.forEach(item => {
-    // dateRange 的值类型是 [string, string] | undefined，其余统一置空字符串
-    props.modelValue[item.prop as string] = item.type === 'dateRange' ? undefined : null
+    const prop = item.prop as string
+    // dateRange 是 [string, string] | undefined；treeSelect 多选时值是数组，置 null 会导致组件内部数组操作报错
+    if (item.type === 'dateRange') {
+      props.modelValue[prop] = undefined
+    } else if (item.type === 'treeSelect' && item.multiple) {
+      props.modelValue[prop] = []
+    } else {
+      props.modelValue[prop] = null
+    }
   })
   emit('update:modelValue', { ...props.modelValue })
   emit('reset')
@@ -128,7 +156,9 @@ const collapseIndex = computed(() => {
   return props.searchbarItems.length
 })
 
-const hasCollapsible = computed(() => collapseIndex.value < props.searchbarItems.length)
+const hasCollapsible = computed(
+  () => collapseIndex.value < props.searchbarItems.length
+)
 
 const visibleItems = computed(() =>
   !props.truncate || isExpanded.value
@@ -150,7 +180,9 @@ const visibleItems = computed(() =>
         v-for="item in visibleItems"
         :key="item.prop"
         class="search-item"
-        :style="item.span && item.span > 1 ? { gridColumn: `span ${item.span}` } : {}"
+        :style="
+          item.span && item.span > 1 ? { gridColumn: `span ${item.span}` } : {}
+        "
       >
         <component
           :is="getComponent(item.type)"
@@ -168,7 +200,12 @@ const visibleItems = computed(() =>
         >
           {{ searchText }}
         </ScButton>
-        <ScButton v-if="showReset" :icon="Refresh" :size="size" @click="handleReset">
+        <ScButton
+          v-if="showReset"
+          :icon="Refresh"
+          :size="size"
+          @click="handleReset"
+        >
           {{ resetText }}
         </ScButton>
         <ScButton

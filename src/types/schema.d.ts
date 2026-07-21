@@ -2,7 +2,8 @@ import type {
   ScResourcePageConfig,
   ScSearchbarItem,
   ScTableColumn,
-  ScResourcePageInstance
+  ScResourcePageInstance,
+  ScExportConfig
 } from '@/components/ScBaseComponents'
 import type { ScDialogFormConfig } from '@/components/ScDialogForm'
 import type {
@@ -18,4 +19,5 @@ declare global {
   type PageInstance = ScResourcePageInstance
   type UploadConfig = ScUploadConfig
   type TemplateConfig = ScTemplateConfig
+  type ExportConfig = ScExportConfig
 }
